@@ -16,7 +16,7 @@ Animation::Animation( int x,int y,int width,int height,int count,
 
 void Animation::Draw( const Vei2& pos,Graphics& gfx ) const
 {
-	gfx.DrawSprite(pos.x, pos.y, frames[iCurFrame], sprite, SpriteEffect::Ghost{ chroma });
+	gfx.DrawSprite(pos.x, pos.y, frames[iCurFrame], sprite, SpriteEffect::Invert{ chroma });
 }
 
 void Animation::Draw( const Vei2& pos,Graphics& gfx,const RectI& clip ) const
@@ -26,7 +26,7 @@ void Animation::Draw( const Vei2& pos,Graphics& gfx,const RectI& clip ) const
 
 void Animation::DrawColor( const Vei2& pos,Graphics& gfx,Color c ) const
 {
-	gfx.DrawSprite(pos.x, pos.y, frames[iCurFrame], sprite, SpriteEffect::Substitution{ chroma,c } );
+	gfx.DrawSprite(pos.x, pos.y, frames[iCurFrame], sprite, SpriteEffect::RotateBRG{chroma} );
 }
 
 void Animation::Update( float dt )

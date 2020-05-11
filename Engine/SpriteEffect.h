@@ -72,5 +72,71 @@ namespace SpriteEffect
 	private:
 		Color chroma;
 	};
+	class RotateBRG 
+	{
+	public:
+		RotateBRG(Color c)
+			:
+			chroma(c)
+		{}
+		void operator()(Color cSrc, int xDest, int yDest, Graphics& gfx) const
+		{
+			if (cSrc != chroma)
+			{
+				const Color inv = {
+					unsigned char(cSrc.GetB()),
+					unsigned char(cSrc.GetR()),
+					unsigned char(cSrc.GetG())
+				};
+				gfx.PutPixel(xDest, yDest, inv);
+			}
+		}
+	private:
+		Color chroma;
+	};
+	class RotateGBR
+	{
+	public:
+		RotateGBR(Color c)
+			:
+			chroma(c)
+		{}
+		void operator()(Color cSrc, int xDest, int yDest, Graphics& gfx) const
+		{
+			if (cSrc != chroma)
+			{
+				const Color inv = {
+					unsigned char(cSrc.GetG()),
+					unsigned char(cSrc.GetB()),
+					unsigned char(cSrc.GetR())
+				};
+				gfx.PutPixel(xDest, yDest, inv);
+			}
+		}
+	private:
+		Color chroma;
+	};
+	class Invert
+	{
+	public:
+		Invert(Color c)
+			:
+			chroma(c)
+		{}
+		void operator()(Color cSrc, int xDest, int yDest, Graphics& gfx) const
+		{
+			if (cSrc != chroma)
+			{
+				const Color inv = {
+					unsigned char((cSrc.GetB() + cSrc.GetG()) / 2),
+					unsigned char((cSrc.GetR() + cSrc.GetB()) / 2),
+					unsigned char((cSrc.GetG() + cSrc.GetR()) / 2),
+				};
+				gfx.PutPixel(xDest, yDest, inv);
+			}
+		}
+	private:
+		Color chroma;
+	};
 
 }
