@@ -116,6 +116,28 @@ namespace SpriteEffect
 	private:
 		Color chroma;
 	};
+	class RotateColsCMY
+	{
+	public:
+		RotateColsCMY(Color c)
+			:
+			chroma(c)
+		{}
+		void operator()(Color cSrc, int xDest, int yDest, Graphics& gfx) const
+		{
+			if (cSrc != chroma)
+			{
+				const Color inv = {
+					unsigned char((cSrc.GetB() + cSrc.GetG()) / 2),
+					unsigned char((cSrc.GetR() + cSrc.GetB()) / 2),
+					unsigned char((cSrc.GetG() + cSrc.GetR()) / 2),
+				};
+				gfx.PutPixel(xDest, yDest, inv);
+			}
+		}
+	private:
+		Color chroma;
+	};
 	class Invert
 	{
 	public:
@@ -128,9 +150,9 @@ namespace SpriteEffect
 			if (cSrc != chroma)
 			{
 				const Color inv = {
-					unsigned char((cSrc.GetB() + cSrc.GetG()) / 2),
-					unsigned char((cSrc.GetR() + cSrc.GetB()) / 2),
-					unsigned char((cSrc.GetG() + cSrc.GetR()) / 2),
+					unsigned char(std::abs(cSrc.GetR() + -255)),
+					unsigned char(std::abs(cSrc.GetG() + -255)),
+					unsigned char(std::abs(cSrc.GetB() + -255)),
 				};
 				gfx.PutPixel(xDest, yDest, inv);
 			}
