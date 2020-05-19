@@ -29,6 +29,7 @@
 #include "Font.h"
 #include "Sound.h"
 #include "Ship.h"
+#include "Background.h"
 
 class Game
 {
@@ -49,6 +50,7 @@ private:
 	/********************************/
 	/*  User Variables              */
 	FrameTimer ft;
+    Background bg = { "Images\\SpaceBG.bmp" };
 	Sound hit = L"Sounds\\hit.wav";
     Ship ship = { {400,300}, "Images\\Shipwithparts_512x256.bmp", 64};
     Vec2 shipVel = { 0,0 };

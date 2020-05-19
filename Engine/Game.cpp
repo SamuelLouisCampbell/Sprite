@@ -59,5 +59,6 @@ void Game::UpdateModel()
 
 void Game::ComposeFrame()
 {
+	bg.Draw(gfx); //draw bg first...
 	ship.Draw(gfx);
 }
