@@ -2,7 +2,7 @@
 
 Character::Character( const Vec2& pos )
 	:
-	sprite( "Images\\link90x90.bmp" ),
+	sprite( "Images\\Shipwithparts_512x256.bmp" ),
 	pos( pos )
 {
 	for( int i = 0; i < (int)Sequence::StandingLeft; i++ )

@@ -81,6 +81,12 @@
     <ClInclude Include="SpriteEffect.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Ship.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Background.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DXErr.cpp">
@@ -125,6 +131,12 @@
     <ClCompile Include="Font.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Ship.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Background.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="FramebufferPS.hlsl">
@@ -141,6 +153,30 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="Chili.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\Fixedsys16x28.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\Lasers_64x32.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\link90x90.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\Shipwithparts_512x256.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\Enemy_1_128x32.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\Enemy_2_128x28.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\Enemy_3_92x32.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\Enemy1.bmp">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

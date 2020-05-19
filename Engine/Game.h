@@ -26,9 +26,9 @@
 #include "Surface.h"
 #include "Animation.h"
 #include "FrameTimer.h"
-#include "Character.h"
 #include "Font.h"
 #include "Sound.h"
+#include "Ship.h"
 
 class Game
 {
@@ -49,8 +49,8 @@ private:
 	/********************************/
 	/*  User Variables              */
 	FrameTimer ft;
-	Character link = Character( { 100.0f,100.0f } );
-	Font font = "Images\\Fixedsys16x28.bmp";
 	Sound hit = L"Sounds\\hit.wav";
+    Ship ship = { {400,300}, "Images\\Shipwithparts_512x256.bmp", 64};
+    Vec2 shipVel = { 0,0 };
 	/********************************/
 };

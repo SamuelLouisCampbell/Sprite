@@ -20,6 +20,13 @@ public:
 		y( (T)src.y)
 	{
 	}
+	template<typename Q>
+	explicit Vec2_(const Vec2_<T>& src)
+		:
+		x((Q)src.x),
+		y((Q)src.y)
+	{
+	}
 	Vec2_ operator+(const Vec2_& rhs) const
 	{
 		return Vec2_(x + rhs.x, y + rhs.y);
@@ -65,6 +72,7 @@ public:
 		}
 		return *this;
 	}
+
 
 
 public:

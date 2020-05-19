@@ -137,6 +137,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h" />
+    <ClInclude Include="Background.h" />
     <ClInclude Include="Character.h" />
     <ClInclude Include="ChiliException.h" />
     <ClInclude Include="ChiliWin.h" />
@@ -147,6 +148,7 @@
     <ClInclude Include="FrameTimer.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Graphics.h" />
+    <ClInclude Include="Ship.h" />
     <ClInclude Include="SpriteEffect.h" />
     <ClInclude Include="Keyboard.h" />
     <ClInclude Include="MainWindow.h" />
@@ -160,6 +162,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Animation.cpp" />
+    <ClCompile Include="Background.cpp" />
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="COMInitializer.cpp" />
     <ClCompile Include="DXErr.cpp" />
@@ -171,6 +174,7 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MainWindow.cpp" />
     <ClCompile Include="Mouse.cpp" />
+    <ClCompile Include="Ship.cpp" />
     <ClCompile Include="Sound.cpp" />
     <ClCompile Include="Surface.cpp" />
   </ItemGroup>
@@ -241,6 +245,14 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="Chili.ico" />
+    <Image Include="Images\Enemy1.bmp" />
+    <Image Include="Images\Enemy_1_128x32.bmp" />
+    <Image Include="Images\Enemy_2_128x28.bmp" />
+    <Image Include="Images\Enemy_3_92x32.bmp" />
+    <Image Include="Images\Fixedsys16x28.bmp" />
+    <Image Include="Images\Lasers_64x32.bmp" />
+    <Image Include="Images\link90x90.bmp" />
+    <Image Include="Images\Shipwithparts_512x256.bmp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
