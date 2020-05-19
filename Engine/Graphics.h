@@ -62,49 +62,116 @@ public:
 	}
 	void PutPixel( int x,int y,Color c );
 	template<typename E>
-	void DrawSprite(int x, int y, const Surface& s, E effect)
+	void DrawSprite(int x, int y, const Surface& s, E effect, bool mirrorX, bool mirrorY)
 	{
-		DrawSprite(x, y, s.GetRect(), s, effect);
+		DrawSprite(x, y, s.GetRect(), s, effect, mirrorX, mirrorY);
 	}
 	template<typename E>
-	void DrawSprite(int x, int y, const RectI& srcRect, const Surface& s, E effect)
+	void DrawSprite(int x, int y, const RectI& srcRect, const Surface& s, E effect, bool mirrorX, bool mirrorY)
 	{
-		DrawSprite(x, y, srcRect, GetScreenRect(), s, effect);
+		DrawSprite(x, y, srcRect, GetScreenRect(), s, effect, mirrorX, mirrorY);
 	}
 	template<typename E>
-	void DrawSprite(int x, int y, RectI srcRect, const RectI& clip, const Surface& s, E effect)
+	void DrawSprite(int x, int y, RectI srcRect, const RectI& clip, const Surface& s, E effect, bool mirrorX, bool mirrorY)
 	{
-		assert(srcRect.left >= 0);
-		assert(srcRect.right <= s.GetWidth());
-		assert(srcRect.top >= 0);
-		assert(srcRect.bottom <= s.GetHeight());
-		if (x < clip.left)
+		if (!mirrorY)
 		{
-			srcRect.left += clip.left - x;
-			x = clip.left;
-		}
-		if (y < clip.top)
-		{
-			srcRect.top += clip.top - y;
-			y = clip.top;
-		}
-		if (x + srcRect.GetWidth() > clip.right)
-		{
-			srcRect.right -= x + srcRect.GetWidth() - clip.right;
-		}
-		if (y + srcRect.GetHeight() > clip.bottom)
-		{
-			srcRect.bottom -= y + srcRect.GetHeight() - clip.bottom;
-		}
-		for (int sy = srcRect.top; sy < srcRect.bottom; sy++)
-		{
-			for (int sx = srcRect.left; sx < srcRect.right; sx++)
+			assert(srcRect.left >= 0);
+			assert(srcRect.right <= s.GetWidth());
+			assert(srcRect.top >= 0);
+			assert(srcRect.bottom <= s.GetHeight());
+			if (x < clip.left)
 			{
-				effect(s.GetPixel(sx, sy),
-					   x + sx - srcRect.left,
-					   y + sy - srcRect.top,
-					   *this
-					);
+				srcRect.left += clip.left - x;
+				x = clip.left;
+			}
+			if (y < clip.top)
+			{
+				srcRect.top += clip.top - y;
+				y = clip.top;
+			}
+			if (x + srcRect.GetWidth() > clip.right)
+			{
+				srcRect.right -= x + srcRect.GetWidth() - clip.right;
+			}
+			if (y + srcRect.GetHeight() > clip.bottom)
+			{
+				srcRect.bottom -= y + srcRect.GetHeight() - clip.bottom;
+			}
+			for (int sy = srcRect.top; sy < srcRect.bottom; sy++)
+			{
+				if (!mirrorX)
+				{
+					for (int sx = srcRect.left; sx < srcRect.right; sx++)
+					{
+						effect(s.GetPixel(sx, sy),
+							x + sx - srcRect.left,
+							y + sy - srcRect.top,
+							*this
+						);
+					}
+				}
+				else
+				{
+					for (int sx = srcRect.left; sx < srcRect.right; sx++)
+					{
+						effect(s.GetPixel(srcRect.right - (sx + 1), sy),
+							x + sx - srcRect.left,
+							y + sy - srcRect.top,
+							*this
+						);
+					}
+				}
+			}
+		}
+		else
+		{
+			assert(srcRect.left >= 0);
+			assert(srcRect.right <= s.GetWidth());
+			assert(srcRect.top >= 0);
+			assert(srcRect.bottom <= s.GetHeight());
+			if (x < clip.left)
+			{
+				srcRect.left += clip.left - x;
+				x = clip.left;
+			}
+			if (y < clip.top)
+			{
+				srcRect.top += clip.top - y;
+				y = clip.top;
+			}
+			if (x + srcRect.GetWidth() > clip.right)
+			{
+				srcRect.right -= x + srcRect.GetWidth() - clip.right;
+			}
+			if (y + srcRect.GetHeight() > clip.bottom)
+			{
+				srcRect.bottom -= y + srcRect.GetHeight() - clip.bottom;
+			}
+			for (int sy = srcRect.top; sy < srcRect.bottom; sy++)
+			{
+				if (!mirrorX)
+				{
+					for (int sx = srcRect.left; sx < srcRect.right; sx++)
+					{
+						effect(s.GetPixel(sx, srcRect.bottom - (sy+1)),
+							x + sx - srcRect.left,
+							y + sy - srcRect.top,
+							*this
+						);
+					}
+				}
+				else
+				{
+					for (int sx = srcRect.left; sx < srcRect.right; sx++)
+					{
+						effect(s.GetPixel(srcRect.right - (sx + 1), srcRect.bottom - (sy+1)),
+							x + sx - srcRect.left,
+							y + sy - srcRect.top,
+							*this
+						);
+					}
+				}
 			}
 		}
 	}

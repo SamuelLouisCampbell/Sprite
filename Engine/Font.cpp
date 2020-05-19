@@ -37,7 +37,7 @@ void Font::DrawText( const std::string& text,const Vei2& pos,Color color,Graphic
 		else if( c >= firstChar + 1 && c <= lastChar )
 		{
 			// use DrawSpriteSubstitute so that we can choose the color of the font rendered
-			gfx.DrawSprite( curPos.x,curPos.y,MapGlyphRect( c ),surface,e );
+			gfx.DrawSprite( curPos.x,curPos.y,MapGlyphRect( c ),surface,e , false, false);
 		}
 		// advance screen pos for next character
 		curPos.x += glyphWidth;

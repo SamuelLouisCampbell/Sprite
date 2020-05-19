@@ -16,17 +16,17 @@ Animation::Animation( int x,int y,int width,int height,int count,
 
 void Animation::Draw( const Vei2& pos,Graphics& gfx ) const
 {
-	gfx.DrawSprite(pos.x, pos.y, frames[iCurFrame], sprite, SpriteEffect::Invert{ chroma });
+	gfx.DrawSprite(pos.x, pos.y, frames[iCurFrame], sprite, SpriteEffect::Invert{ chroma }, false, false);
 }
 
 void Animation::Draw( const Vei2& pos,Graphics& gfx,const RectI& clip ) const
 {
-	gfx.DrawSprite(pos.x, pos.y, frames[iCurFrame], clip, sprite, SpriteEffect::Copy{});
+	gfx.DrawSprite(pos.x, pos.y, frames[iCurFrame], clip, sprite, SpriteEffect::Copy{}, false, false);
 }
 
 void Animation::DrawColor( const Vei2& pos,Graphics& gfx,Color c ) const
 {
-	gfx.DrawSprite(pos.x, pos.y, frames[iCurFrame], sprite, SpriteEffect::RotateBRG{chroma} );
+	gfx.DrawSprite(pos.x, pos.y, frames[iCurFrame], sprite, SpriteEffect::RotateBRG{chroma}, false, false);
 }
 
 void Animation::Update( float dt )

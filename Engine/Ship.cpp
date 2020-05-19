@@ -10,7 +10,7 @@ Ship::Ship(const Vec2& pos,const std::string filename, int tileSize)
 
 void Ship::Draw(Graphics& gfx) const
 {
-	gfx.DrawSprite(drawCentre.x, drawCentre.y, drawSelect, sprite, SpriteEffect::Chroma{ Colors::White });
+	gfx.DrawSprite(drawCentre.x, drawCentre.y, drawSelect, sprite, SpriteEffect::Chroma{ Colors::White }, false, false);
 }
 
 void Ship::Update(const Vec2& vel, float deltaTime)

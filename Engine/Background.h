@@ -9,12 +9,14 @@ class Background
 {
 public:
 	Background(const std::string filename);
-	void Draw(Graphics& gfx) const;
+	void Draw(Graphics& gfx);
+	void Update();
 	void SetBgSpeeg(const float speed);
 	float GetBgSpeed() const;
 private:
-	Surface bg; 
-	float scrollSpeed = 1.0f; 
-
+	Surface bg0;
+	float scrollSpeed = 3.0f;
+	RectI bgSize;
+	Vec2 startPos;
 };
 
