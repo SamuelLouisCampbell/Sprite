@@ -135,18 +135,19 @@ public:
 				srcRect.left += clip.left - x;
 				x = clip.left;
 			}
-			if (y < clip.top)
-			{
-				srcRect.top += clip.top - y;
-				y = clip.top;
-			}
 			if (x + srcRect.GetWidth() > clip.right)
 			{
 				srcRect.right -= x + srcRect.GetWidth() - clip.right;
 			}
+
+			if (y < clip.top)
+			{
+				srcRect.bottom -= clip.top - y;
+				y = clip.top;
+			}
 			if (y + srcRect.GetHeight() > clip.bottom)
 			{
-				srcRect.bottom -= y + srcRect.GetHeight() - clip.bottom;
+				srcRect.top += y + srcRect.GetHeight() - clip.bottom;
 			}
 			for (int sy = srcRect.top; sy < srcRect.bottom; sy++)
 			{

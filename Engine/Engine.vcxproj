@@ -254,6 +254,7 @@
     <Image Include="Images\link90x90.bmp" />
     <Image Include="Images\Shipwithparts_512x256.bmp" />
     <Image Include="Images\SpaceBG.bmp" />
+    <Image Include="Images\SpaceBGmirror.bmp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

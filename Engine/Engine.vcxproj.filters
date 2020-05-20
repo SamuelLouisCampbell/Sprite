@@ -182,5 +182,8 @@
     <Image Include="Images\SpaceBG.bmp">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="Images\SpaceBGmirror.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>
