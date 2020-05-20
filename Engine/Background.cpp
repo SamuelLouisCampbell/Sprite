@@ -4,33 +4,26 @@ Background::Background(const std::string filename)
 	:
 	bg0(filename)
 {
-	startPos.y = bg0.GetRect().top - bg0.GetHeight();
-	startPos.x = 0; 
+	startPos0.y = -bg0.GetHeight();
+	startPos0.x = 0; 
+	startPos1.y = 0;
+	startPos1.x = 0;
 }
 
 void Background::Draw(Graphics& gfx)
 {
-
-	if (startPos.y < Graphics::ScreenHeight + (bg0.GetHeight()/2))
+	startPos0.y += scrollSpeed;
+	startPos1.y += scrollSpeed;
+	if (startPos0.y == 0)
 	{
-		startPos.y += scrollSpeed;
+		startPos1.y = -bg0.GetHeight();
 	}
-	else
+	if (startPos1.y == 0)
 	{
-		startPos.y = bg0.GetRect().top - bg0.GetHeight();
+		startPos0.y = -bg0.GetHeight();
 	}
-	gfx.DrawSprite(startPos.x,startPos.y, bg0, SpriteEffect::Copy{}, false, false);
-
-	if (startPos.y > 0)
-	{
-	gfx.DrawSprite(startPos.x, startPos.y - bg0.GetHeight(), bg0, SpriteEffect::Copy{}, false, false);
-	}
-	else if (startPos.y < Graphics::ScreenHeight)
-	{
-		gfx.DrawSprite(startPos.x, startPos.y + bg0.GetHeight(), bg0, SpriteEffect::Copy{}, false, false);
-	}
-
-	
+	gfx.DrawSprite(startPos0.x, startPos0.y, bg0, SpriteEffect::Copy{}, false, false);
+	gfx.DrawSprite(startPos1.x, startPos1.y, bg0, SpriteEffect::Copy{}, false, false);
 }
 
 void Background::Update()

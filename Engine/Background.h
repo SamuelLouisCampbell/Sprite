@@ -16,6 +16,7 @@ public:
 private:
 	Surface bg0;
 	float scrollSpeed = 3.0f;
-	Vec2 startPos;
+	Vec2 startPos0;
+	Vec2 startPos1;
 };
 
