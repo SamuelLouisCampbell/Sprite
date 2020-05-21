@@ -15,8 +15,7 @@ void Ship::Draw(Graphics& gfx) const
 
 void Ship::Update(const Vec2& vel, float deltaTime)
 {
-	pos.x += (vel.x * (deltaTime * speed));
-	pos.y += (vel.y * (deltaTime * speed));
+	collisionRect = {pos.x - (tileSize/4), pos.x + (tileSize/4), pos.y - (tileSize/4), pos.y+ (tileSize /4) };
 }
 
 void Ship::TakeDamage(int amount)
@@ -38,4 +37,9 @@ void Ship::SetPos(const Vec2& pos_in)
 {
 	pos = pos_in;
 	drawCentre = { pos.x - (tileSize / 2), pos.y - (tileSize / 2) };
+}
+
+RectF Ship::GetCollisionRect() const
+{
+	return collisionRect;
 }

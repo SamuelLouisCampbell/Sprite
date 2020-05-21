@@ -25,20 +25,20 @@ public:
 	void RegainHP(int amount); 
 	bool isAlive() const;
 	void SetPos(const Vec2& pos_in);
+	RectF GetCollisionRect() const; 
 private:
 	int tileSize;
 	Surface sprite; 
 	Vec2 pos;
-	Vec2 drawCentre = { pos.x - (tileSize / 2), pos.y - (tileSize / 2) };
+	Vec2 drawCentre;
 	Vec2 vel = { 0.0f, 0.0f };
 	ShipType CurType = ShipType::lightCruiser;
 	float speed = 110.0f;
 	int healthPoints = 200;
-	Vei2 topCorner = { 64,0 };
-	Vei2 DrawReigonEnd = { topCorner.x + 64,topCorner.y + 64 };
+	Vei2 topCorner = { tileSize,0 };
+	Vei2 DrawReigonEnd = { topCorner.x + tileSize,topCorner.y + tileSize };
 	RectI drawSelect = {topCorner, DrawReigonEnd};
-	RectF collisionRect = { pos.x - (tileSize / 2), pos.x + (tileSize / 2), pos.y - (tileSize / 2), pos.y + (tileSize / 2) };
-	
+	RectF collisionRect;
 
 	static constexpr float effectDuration = 0.045f;
 	float effectTime = 0.0f;

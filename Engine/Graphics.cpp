@@ -332,34 +332,45 @@ Color Graphics::GetPixel( int x,int y ) const
 }
 void Graphics::DrawBorder(int x, int y, int width, int height, int stroke, Color c)
 {
-	for (int i = 0; i < width; i++)
+	if (x > 0 &&
+		x + width < ScreenWidth &&
+		y > 0 &&
+		y + height < ScreenHeight)
 	{
-		for (int j = 0; j < stroke; j++)
+		for (int i = 0; i < width; i++)
 		{
-			PutPixel(x + i, y - j, c);
+			for (int j = 0; j < stroke; j++)
+			{
+				PutPixel(x + i, y - j, c);
+			}
+		}
+		for (int i = 0; i < stroke; i++)
+		{
+			for (int j = 1 - stroke; j < height + stroke; j++)
+			{
+				PutPixel(x - i, y + j, c);
+			}
+		}
+		for (int i = width; i < width + stroke; i++)
+		{
+			for (int j = 1 - stroke; j < height + stroke; j++)
+			{
+				PutPixel(x + i, y + j, c);
+			}
+		}
+		for (int i = 0; i < width; i++)
+		{
+			for (int j = height; j < height + stroke; j++)
+			{
+				PutPixel(x + i, y + j, c);
+			}
 		}
 	}
-	for (int i = 0; i < stroke; i++)
-	{
-		for (int j = 1 - stroke; j < height + stroke; j++)
-		{
-			PutPixel(x - i, y + j, c);
-		}
-	}
-	for (int i = width; i < width + stroke; i++)
-	{
-		for (int j = 1 - stroke; j < height + stroke; j++)
-		{
-			PutPixel(x + i, y + j, c);
-		}
-	}
-	for (int i = 0; i < width; i++)
-	{
-		for (int j = height; j < height + stroke; j++)
-		{
-			PutPixel(x + i, y + j, c);
-		}
-	}
+}
+
+void Graphics::DrawBorder(RectF rect, int stroke, Color c)
+{
+	DrawBorder(int(rect.left), int(rect.top), int(rect.right - rect.left), int(rect.bottom - rect.top), stroke, c);
 }
 
 

@@ -62,6 +62,7 @@ public:
 	}
 	void PutPixel( int x,int y,Color c );
 	void DrawBorder(int x, int y, int width, int height, int stroke, Color c);
+	void DrawBorder(RectF rect, int stroke, Color c);
 	template<typename E>
 	void DrawSprite(int x, int y, const Surface& s, E effect, bool mirrorX, bool mirrorY)
 	{

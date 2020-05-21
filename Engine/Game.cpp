@@ -52,7 +52,13 @@ void Game::UpdateModel()
 		}
 	}
 	ship.SetPos(wnd.mouse.GetPosF());
+	ship.Update({ 0,0 }, dt);
 	enemy.Update(dt);
+	if (ship.GetCollisionRect().IsOverlappingWith(enemy.GetCollisionRect()))
+	{
+		enemy.ActivateEffect();
+	}
+	
 	
 }
 
@@ -61,4 +67,7 @@ void Game::ComposeFrame()
 	bg.Draw(gfx); //draw bg first...
 	ship.Draw(gfx);
 	enemy.Draw(gfx);
+
+	gfx.DrawBorder(ship.GetCollisionRect(), 1, Colors::Green);
+	gfx.DrawBorder(enemy.GetCollisionRect(), 1, Colors::Red);
 }
