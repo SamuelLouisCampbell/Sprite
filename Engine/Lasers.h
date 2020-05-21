@@ -1,10 +1,13 @@
 #pragma once
 #include "Animation.h"
+#include "Surface.h"
 
 class Lasers
 {
 public:
+
 private:
+	Surface sfc;
 	Animation laserAnim;
 	Vec2 pos;
 	float hitBoxRadius = 4.0f;

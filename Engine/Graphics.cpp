@@ -312,6 +312,7 @@ void Graphics::BeginFrame()
 	memset( pSysBuffer,0u,sizeof( Color ) * Graphics::ScreenHeight * Graphics::ScreenWidth );
 }
 
+
 void Graphics::PutPixel( int x,int y,Color c )
 {
 	assert( x >= 0 );
@@ -329,6 +330,38 @@ Color Graphics::GetPixel( int x,int y ) const
 	assert( y < int( Graphics::ScreenHeight ) );
 	return pSysBuffer[Graphics::ScreenWidth * y + x];
 }
+void Graphics::DrawBorder(int x, int y, int width, int height, int stroke, Color c)
+{
+	for (int i = 0; i < width; i++)
+	{
+		for (int j = 0; j < stroke; j++)
+		{
+			PutPixel(x + i, y - j, c);
+		}
+	}
+	for (int i = 0; i < stroke; i++)
+	{
+		for (int j = 1 - stroke; j < height + stroke; j++)
+		{
+			PutPixel(x - i, y + j, c);
+		}
+	}
+	for (int i = width; i < width + stroke; i++)
+	{
+		for (int j = 1 - stroke; j < height + stroke; j++)
+		{
+			PutPixel(x + i, y + j, c);
+		}
+	}
+	for (int i = 0; i < width; i++)
+	{
+		for (int j = height; j < height + stroke; j++)
+		{
+			PutPixel(x + i, y + j, c);
+		}
+	}
+}
+
 
 
 //////////////////////////////////////////////////
