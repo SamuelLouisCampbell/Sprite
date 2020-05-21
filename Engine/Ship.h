@@ -24,12 +24,12 @@ public:
 	void TakeDamage(int amount);
 	void RegainHP(int amount); 
 	bool isAlive() const;
-	void SetPos(const Vei2& pos_in);
+	void SetPos(const Vec2& pos_in);
 private:
 	int tileSize;
 	Surface sprite; 
-	Vei2 pos;
-	Vei2 drawCentre = { pos.x - (tileSize / 2), pos.y - (tileSize / 2) };
+	Vec2 pos;
+	Vec2 drawCentre = { pos.x - (tileSize / 2), pos.y - (tileSize / 2) };
 	Vec2 vel = { 0.0f, 0.0f };
 	ShipType CurType = ShipType::lightCruiser;
 	float speed = 110.0f;
@@ -37,7 +37,7 @@ private:
 	Vei2 topCorner = { 64,0 };
 	Vei2 DrawReigonEnd = { topCorner.x + 64,topCorner.y + 64 };
 	RectI drawSelect = {topCorner, DrawReigonEnd};
-	RectI collisionRect;
+	RectF collisionRect = { pos.x - (tileSize / 2), pos.x + (tileSize / 2), pos.y - (tileSize / 2), pos.y + (tileSize / 2) };
 	
 
 	static constexpr float effectDuration = 0.045f;

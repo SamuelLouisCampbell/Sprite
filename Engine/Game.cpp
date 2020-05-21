@@ -24,9 +24,9 @@
 Game::Game( MainWindow& wnd )
 	:
 	wnd( wnd ),
-	gfx( wnd )
+	gfx( wnd ),
+	enemy({200,100})
 {
-	
 }
 
 void Game::Go()
@@ -48,10 +48,11 @@ void Game::UpdateModel()
 		if( e.IsPress() && e.GetCode() == VK_SPACE )
 		{
 			hit.Play();
+			enemy.ActivateEffect();
 		}
 	}
-	
-	ship.SetPos(wnd.mouse.GetPos());
+	ship.SetPos(wnd.mouse.GetPosF());
+	enemy.Update(dt);
 	
 }
 
@@ -59,4 +60,5 @@ void Game::ComposeFrame()
 {
 	bg.Draw(gfx); //draw bg first...
 	ship.Draw(gfx);
+	enemy.Draw(gfx);
 }

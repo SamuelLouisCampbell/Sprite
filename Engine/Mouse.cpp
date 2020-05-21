@@ -26,6 +26,11 @@ Vei2 Mouse::GetPos() const
 	return { x,y };
 }
 
+Vec2 Mouse::GetPosF() const
+{
+	return { float(x),float(y) };
+}
+
 int Mouse::GetPosX() const
 {
 	return x;

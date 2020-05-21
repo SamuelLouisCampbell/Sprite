@@ -14,19 +14,19 @@ Animation::Animation( int x,int y,int width,int height,int count,
 	}
 }
 
-void Animation::Draw( const Vei2& pos,Graphics& gfx ) const
+void Animation::Draw( const Vei2& pos,Graphics& gfx, bool mirrorX, bool mirrorY) const
 {
-	gfx.DrawSprite(pos.x, pos.y, frames[iCurFrame], sprite, SpriteEffect::Invert{ chroma }, false, false);
+	gfx.DrawSprite(pos.x, pos.y, frames[iCurFrame], sprite, SpriteEffect::Chroma{ chroma }, mirrorX, mirrorY);
 }
 
-void Animation::Draw( const Vei2& pos,Graphics& gfx,const RectI& clip ) const
+void Animation::Draw( const Vei2& pos,Graphics& gfx,const RectI& clip, bool mirrorX, bool mirrorY) const
 {
-	gfx.DrawSprite(pos.x, pos.y, frames[iCurFrame], clip, sprite, SpriteEffect::Copy{}, false, false);
+	gfx.DrawSprite(pos.x, pos.y, frames[iCurFrame], clip, sprite, SpriteEffect::Copy{}, mirrorX, mirrorY);
 }
 
-void Animation::DrawColor( const Vei2& pos,Graphics& gfx,Color c ) const
+void Animation::DrawColor( const Vei2& pos,Graphics& gfx,Color c, bool mirrorX, bool mirrorY) const
 {
-	gfx.DrawSprite(pos.x, pos.y, frames[iCurFrame], sprite, SpriteEffect::RotateBRG{chroma}, false, false);
+	gfx.DrawSprite(pos.x, pos.y, frames[iCurFrame], sprite, SpriteEffect::Substitution{Colors::White, Colors::Red }, mirrorX, mirrorY);
 }
 
 void Animation::Update( float dt )

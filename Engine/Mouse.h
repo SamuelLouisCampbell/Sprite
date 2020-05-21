@@ -97,6 +97,7 @@ public:
 	Mouse( const Mouse& ) = delete;
 	Mouse& operator=( const Mouse& ) = delete;
 	Vei2 GetPos() const;
+	Vec2 GetPosF() const; 
 	int GetPosX() const;
 	int GetPosY() const;
 	bool LeftIsPressed() const;

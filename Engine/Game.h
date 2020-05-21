@@ -30,6 +30,8 @@
 #include "Sound.h"
 #include "Ship.h"
 #include "Background.h"
+#include "Enemy.h"
+
 
 class Game
 {
@@ -54,5 +56,6 @@ private:
 	Sound hit = L"Sounds\\hit.wav";
     Ship ship = { {400,300}, "Images\\Shipwithparts_512x256.bmp", 64};
     Vec2 shipVel = { 0,0 };
+    Enemy enemy; 
 	/********************************/
 };
