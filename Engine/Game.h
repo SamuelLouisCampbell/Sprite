@@ -31,6 +31,7 @@
 #include "Ship.h"
 #include "Background.h"
 #include "Enemy.h"
+#include "Lasers.h"
 
 
 class Game
@@ -57,5 +58,6 @@ private:
     Ship ship = { {400,300}, "Images\\Shipwithparts_512x256.bmp", 64};
     Vec2 shipVel = { 0,0 };
     Enemy enemy; 
+    Lasers laser;
 	/********************************/
 };

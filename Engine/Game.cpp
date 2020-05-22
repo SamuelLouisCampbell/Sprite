@@ -25,7 +25,8 @@ Game::Game( MainWindow& wnd )
 	:
 	wnd( wnd ),
 	gfx( wnd ),
-	enemy({200,100})
+	enemy({200,100}),
+	laser({ 400,400 })
 {
 }
 
@@ -54,6 +55,7 @@ void Game::UpdateModel()
 	ship.SetPos(wnd.mouse.GetPosF());
 	ship.Update({ 0,0 }, dt);
 	enemy.Update(dt);
+	laser.Update(dt);
 	if (ship.GetCollisionRect().IsOverlappingWith(enemy.GetCollisionRect()))
 	{
 		enemy.ActivateEffect();
@@ -67,6 +69,7 @@ void Game::ComposeFrame()
 	bg.Draw(gfx); //draw bg first...
 	ship.Draw(gfx);
 	enemy.Draw(gfx);
+	laser.Draw(gfx);
 
 	gfx.DrawBorder(ship.GetCollisionRect(), 1, Colors::Green);
 	gfx.DrawBorder(enemy.GetCollisionRect(), 1, Colors::Red);
