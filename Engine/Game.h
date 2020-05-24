@@ -58,6 +58,9 @@ private:
     Ship ship = { {400,300}, "Images\\Shipwithparts_512x256.bmp", 64};
     Vec2 shipVel = { 0,0 };
     Enemy enemy; 
+    Surface laserSfc = { "Images\\Lasers_64x32.bmp" };
     Lasers laser;
+
+    
 	/********************************/
 };

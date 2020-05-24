@@ -26,7 +26,7 @@ Game::Game( MainWindow& wnd )
 	wnd( wnd ),
 	gfx( wnd ),
 	enemy({200,100}),
-	laser({ 400,400 })
+	laser({ 200,500 }, laserSfc)
 {
 }
 
@@ -56,11 +56,7 @@ void Game::UpdateModel()
 	ship.Update({ 0,0 }, dt);
 	enemy.Update(dt);
 	laser.Update(dt);
-	if (ship.GetCollisionRect().IsOverlappingWith(enemy.GetCollisionRect()))
-	{
-		enemy.ActivateEffect();
-	}
-	
+	enemy.TakeDamageOnHit(laser, 100);
 	
 }
 

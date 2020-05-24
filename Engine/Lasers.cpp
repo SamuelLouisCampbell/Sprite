@@ -1,15 +1,23 @@
 #include "Lasers.h"
 
-Lasers::Lasers(Vec2 pos_in)
+Lasers::Lasers(Vec2 pos_in, Surface& sfc)
 	:
-	pos(pos_in)
+	pos(pos_in),
+	sfc(sfc)
+{
+}
+
+Lasers::~Lasers()
 {
 }
 
 void Lasers::Draw(Graphics& gfx)
 {
-	laserAnimintMain.Draw((Vei2)drawCentre, gfx, false, false);
-	laserAnimintSub0.Draw((Vei2)drawCentre, gfx, false, false);
+	if(!hasHit)
+	{ 
+		laserAnimintMain.Draw((Vei2)drawCentre, gfx, false, false);
+		laserAnimintSub0.Draw((Vei2)drawCentre, gfx, false, false);
+	}
 }
 
 void Lasers::Update(const float dt)
@@ -25,4 +33,18 @@ void Lasers::Update(const float dt)
 Vec2 Lasers::GetPos() const
 {
 	return pos;
+}
+
+RectF Lasers::GetHitBox() const
+{
+	return hitBox;
+}
+
+void Lasers::SetHitTrue()
+{
+	if (!hasHit)
+	{
+		hasHit = true;
+	}
+	
 }

@@ -4,6 +4,7 @@
 #include "Surface.h"
 #include "Rect.h"
 #include "Animation.h"
+#include "Lasers.h"
 
 
 class Enemy
@@ -14,6 +15,8 @@ public:
 	void Update(float dt);
 	void ActivateEffect();
 	RectF GetCollisionRect() const;
+	void TakeDamageOnHit(Lasers& laser, int damage_amount);
+	bool IsAlive() const;
 
 private:
 	Vec2 pos;
