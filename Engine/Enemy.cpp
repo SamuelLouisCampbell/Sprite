@@ -8,14 +8,17 @@ Enemy::Enemy(const Vec2& pos)
 
 void Enemy::Draw(Graphics& gfx)
 {
-	// if effect active, draw sprite replacing opaque pixels with red
-	if (effectActive)
+	if (HealthPoints > 0)
 	{
-		animation.DrawColor((Vei2)drawCentre, gfx, Colors::Red, false, true);
-	}
-	else
-	{
-		animation.Draw((Vei2)drawCentre, gfx, false, true);
+		// if effect active, draw sprite replacing opaque pixels with red
+		if (effectActive)
+		{
+			animation.DrawColor((Vei2)drawCentre, gfx, Colors::Red, false, true);
+		}
+		else
+		{
+			animation.Draw((Vei2)drawCentre, gfx, false, true);
+		}
 	}
 }
 
@@ -50,7 +53,7 @@ RectF Enemy::GetCollisionRect() const
 
 void Enemy::TakeDamageOnHit(Lasers& laser, int damage_amount)
 {
-	if (collisionRect.IsOverlappingWith(laser.GetHitBox()) && HealthPoints > 0)
+	if (collisionRect.IsOverlappingWith(laser.GetHitBox()) && HealthPoints > 0 && !laser.LaserHasHit() )
 	{
 		HealthPoints -= damage_amount; 
 		ActivateEffect();

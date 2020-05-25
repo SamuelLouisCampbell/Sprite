@@ -32,6 +32,8 @@
 #include "Background.h"
 #include "Enemy.h"
 #include "Lasers.h"
+#include <vector>
+#include "Utility.h"
 
 
 class Game
@@ -59,7 +61,7 @@ private:
     Vec2 shipVel = { 0,0 };
     Enemy enemy; 
     Surface laserSfc = { "Images\\Lasers_64x32.bmp" };
-    Lasers laser;
+    std::vector<Lasers> lasers;
 
     
 	/********************************/

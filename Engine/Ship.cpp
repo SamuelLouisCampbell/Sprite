@@ -39,6 +39,11 @@ void Ship::SetPos(const Vec2& pos_in)
 	drawCentre = { pos.x - (tileSize / 2), pos.y - (tileSize / 2) };
 }
 
+Vec2 Ship::GetPos() const
+{
+	return pos;
+}
+
 RectF Ship::GetCollisionRect() const
 {
 	return collisionRect;

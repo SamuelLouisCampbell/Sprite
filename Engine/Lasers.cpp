@@ -5,6 +5,7 @@ Lasers::Lasers(Vec2 pos_in, Surface& sfc)
 	pos(pos_in),
 	sfc(sfc)
 {
+
 }
 
 Lasers::~Lasers()
@@ -40,11 +41,12 @@ RectF Lasers::GetHitBox() const
 	return hitBox;
 }
 
+bool Lasers::LaserHasHit() const
+{
+	return hasHit;
+}
+
 void Lasers::SetHitTrue()
 {
-	if (!hasHit)
-	{
-		hasHit = true;
-	}
-	
+	hasHit = true;	
 }

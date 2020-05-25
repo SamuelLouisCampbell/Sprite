@@ -12,6 +12,7 @@ public:
 	void Update(const float dt);
 	Vec2 GetPos()const;
 	RectF GetHitBox() const;
+	bool LaserHasHit() const; 
 	void SetHitTrue();
 
 private:

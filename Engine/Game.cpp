@@ -25,8 +25,7 @@ Game::Game( MainWindow& wnd )
 	:
 	wnd( wnd ),
 	gfx( wnd ),
-	enemy({200,100}),
-	laser({ 200,500 }, laserSfc)
+	enemy({200,100})
 {
 }
 
@@ -55,8 +54,22 @@ void Game::UpdateModel()
 	ship.SetPos(wnd.mouse.GetPosF());
 	ship.Update({ 0,0 }, dt);
 	enemy.Update(dt);
-	laser.Update(dt);
-	enemy.TakeDamageOnHit(laser, 100);
+
+	if (wnd.mouse.LeftIsPressed())
+	{
+		lasers.emplace_back(ship.GetPos(), laserSfc);
+	}
+	for (int i = 0; i < lasers.size(); i++)
+	{
+		lasers[i].Update(dt);
+		enemy.TakeDamageOnHit(lasers[i], 50);
+		if (lasers[i].LaserHasHit())
+		{
+			remove_element(lasers, i);
+		}
+	}
+
+	
 	
 }
 
@@ -65,7 +78,11 @@ void Game::ComposeFrame()
 	bg.Draw(gfx); //draw bg first...
 	ship.Draw(gfx);
 	enemy.Draw(gfx);
-	laser.Draw(gfx);
+	for (auto l : lasers)
+	{
+		l.Draw(gfx);
+	}
+
 
 	gfx.DrawBorder(ship.GetCollisionRect(), 1, Colors::Green);
 	gfx.DrawBorder(enemy.GetCollisionRect(), 1, Colors::Red);

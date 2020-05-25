@@ -148,6 +148,7 @@
     <ClInclude Include="FrameTimer.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Graphics.h" />
+    <ClInclude Include="Utility.h" />
     <ClInclude Include="Lasers.h" />
     <ClInclude Include="Ship.h" />
     <ClInclude Include="SpriteEffect.h" />

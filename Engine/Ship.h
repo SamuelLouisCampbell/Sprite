@@ -25,6 +25,8 @@ public:
 	void RegainHP(int amount); 
 	bool isAlive() const;
 	void SetPos(const Vec2& pos_in);
+	Vec2 GetPos() const; 
+
 	RectF GetCollisionRect() const; 
 private:
 	int tileSize;
