@@ -21,6 +21,6 @@ private:
 	std::vector<RectI> frames;
 	int iCurFrame = 0;
 	float holdTime;
-	float curFrameTime = 0;
+	float curFrameTime = 0.0f;
 	
 };

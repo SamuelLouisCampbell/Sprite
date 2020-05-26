@@ -10,7 +10,7 @@ public:
 	Lasers(const Vec2& pos, const Vec2& dir)
 		:
 		laser("Images\\Lasers_64x32.bmp"),
-		laser_animation(0,0,8,8,4,laser,0.1f, Colors::White),
+		laser_animation(0,8,8,8,4,laser,0.02f,Colors::White),
 		pos(pos),
 		vel(dir)
 	{}
@@ -37,7 +37,7 @@ public:
 	Lasers(const Lasers& src)
 		:
 		laser(src.laser),
-		laser_animation(0, 0, 8, 8, 4, laser, 0.1f),
+		laser_animation(0, 8, 8, 8, 4, laser, 0.02f, Colors::White),
 		pos(src.pos),
 		vel(src.vel)
 	{}

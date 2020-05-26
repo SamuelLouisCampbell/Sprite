@@ -24,8 +24,8 @@
 Game::Game( MainWindow& wnd )
 	:
 	wnd( wnd ),
-	gfx( wnd )//,
-	//enemy({200,100})
+	gfx( wnd ),
+	enemy({200,100})
 {
 }
 
@@ -44,22 +44,12 @@ void Game::UpdateModel()
 #else
 	const float dt = 1.0f / 60.0f;
 #endif
-	// process key messages while any remain
-	while( !wnd.kbd.KeyIsEmpty() )
-	{
-		const auto e = wnd.kbd.ReadKey();
-		// only interested in space bar presses
-		if( e.IsPress() && e.GetCode() == VK_SPACE )
-		{
-			hit.Play();
-			//enemy.ActivateEffect();
-		}
-	}
+
 
 	const auto e = wnd.mouse.Read();
 	if (e.GetType() == Mouse::Event::Type::LPress)
 	{
-		Vec2 lasVec = { 100.0f, -1.0f };
+		Vec2 lasVec = { 0.0f, -300.0f };
 		lasers.emplace_back(ship.GetPos(),lasVec);
 	}
 	for (auto& l : lasers)
@@ -68,22 +58,33 @@ void Game::UpdateModel()
 	}
 	ship.SetPos(wnd.mouse.GetPosF());
 	ship.Update({ 0,0 }, dt);
-	
+	enemy.Update(dt);
+	const auto enemy_hitbox = enemy.GetCollisionRect();
+	for (size_t i = 0u; i < lasers.size(); )
+	{
+		if (lasers[i].GetHitbox().IsOverlappingWith(enemy_hitbox) && enemy.IsAlive())
+		{
+			remove_element(lasers, i);
+			enemy.TakeDamageOnHit(25);
+			continue;
+		}
+		i++;
+	}
 
 }
 
 void Game::ComposeFrame()
 {
-//	bg.Draw(gfx); //draw bg first...
+	bg.Draw(gfx); //draw bg first...
 	ship.Draw(gfx);
-	//enemy.Draw(gfx);
-	for (auto l : lasers)
+	enemy.Draw(gfx);
+	for (auto& l : lasers)
 	{
 		l.Draw(gfx);
-		gfx.DrawBorder(l.GetHitbox(), 1, Colors::Green);
+		//gfx.DrawBorder(l.GetHitbox(), 1, Colors::Green);
 	}
-
+	ship.Draw(gfx);
 
 	gfx.DrawBorder(ship.GetCollisionRect(), 1, Colors::Cyan);
-	//gfx.DrawBorder(enemy.GetCollisionRect(), 1, Colors::Red);
+	gfx.DrawBorder(enemy.GetCollisionRect(), 1, Colors::Red);
 }

@@ -178,7 +178,22 @@ public:
 			}
 		}
 	}
-	
+	void DrawRect(RectF rect, Color c)
+	{
+		if (rect.left > rect.right)
+		{
+			std::swap(rect.left, rect.right);
+		}
+		if (rect.top > rect.bottom)
+		{
+			std::swap(rect.left, rect.right);
+		}
+		for (int i = rect.left; i < rect.right; i++)
+		{
+			for(int j = rect.top; 
+		}
+	}
+
 	~Graphics();
 private:
 	Microsoft::WRL::ComPtr<IDXGISwapChain>				pSwapChain;

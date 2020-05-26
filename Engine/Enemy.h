@@ -13,9 +13,8 @@ public:
 	Enemy(const Vec2& pos);
 	void Draw(Graphics& gfx);
 	void Update(float dt);
-	void ActivateEffect();
 	RectF GetCollisionRect() const;
-	void TakeDamageOnHit(Lasers& laser, int damage_amount);
+	void TakeDamageOnHit(int damage_amount);
 	bool IsAlive() const;
 
 private:
@@ -32,6 +31,6 @@ private:
 	bool effectActive = false;
 	int HealthPoints = 100; 
 	RectF collisionRect;
-
+	void ActivateEffect();
 };
 
