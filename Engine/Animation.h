@@ -17,10 +17,10 @@ private:
 	void Advance();
 private:
 	Color chroma;
-	const Surface& sprite;
+	const Surface* sprite;
 	std::vector<RectI> frames;
 	int iCurFrame = 0;
 	float holdTime;
-	float curFrameTime = 0.0f;
+	float curFrameTime = 0;
 	
 };

@@ -24,8 +24,8 @@
 Game::Game( MainWindow& wnd )
 	:
 	wnd( wnd ),
-	gfx( wnd ),
-	enemy({200,100})
+	gfx( wnd )//,
+	//enemy({200,100})
 {
 }
 
@@ -39,7 +39,11 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
+#ifdef NDEBUG
 	float dt = ft.Mark();
+#else
+	const float dt = 1.0f / 60.0f;
+#endif
 	// process key messages while any remain
 	while( !wnd.kbd.KeyIsEmpty() )
 	{
@@ -48,42 +52,38 @@ void Game::UpdateModel()
 		if( e.IsPress() && e.GetCode() == VK_SPACE )
 		{
 			hit.Play();
-			enemy.ActivateEffect();
+			//enemy.ActivateEffect();
 		}
+	}
+
+	const auto e = wnd.mouse.Read();
+	if (e.GetType() == Mouse::Event::Type::LPress)
+	{
+		Vec2 lasVec = { 100.0f, -1.0f };
+		lasers.emplace_back(ship.GetPos(),lasVec);
+	}
+	for (auto& l : lasers)
+	{
+		l.Update(dt);
 	}
 	ship.SetPos(wnd.mouse.GetPosF());
 	ship.Update({ 0,0 }, dt);
-	enemy.Update(dt);
-
-	if (wnd.mouse.LeftIsPressed())
-	{
-		lasers.emplace_back(ship.GetPos(), laserSfc);
-	}
-	for (int i = 0; i < lasers.size(); i++)
-	{
-		lasers[i].Update(dt);
-		enemy.TakeDamageOnHit(lasers[i], 50);
-		if (lasers[i].LaserHasHit())
-		{
-			remove_element(lasers, i);
-		}
-	}
-
 	
-	
+
 }
 
 void Game::ComposeFrame()
 {
-	bg.Draw(gfx); //draw bg first...
+//	bg.Draw(gfx); //draw bg first...
 	ship.Draw(gfx);
-	enemy.Draw(gfx);
+	//enemy.Draw(gfx);
 	for (auto l : lasers)
 	{
 		l.Draw(gfx);
+		gfx.DrawBorder(l.GetHitbox(), 1, Colors::Green);
 	}
 
 
-	gfx.DrawBorder(ship.GetCollisionRect(), 1, Colors::Green);
-	gfx.DrawBorder(enemy.GetCollisionRect(), 1, Colors::Red);
+	gfx.DrawBorder(ship.GetCollisionRect(), 1, Colors::Cyan);
+	//gfx.DrawBorder(enemy.GetCollisionRect(), 1, Colors::Red);
 }

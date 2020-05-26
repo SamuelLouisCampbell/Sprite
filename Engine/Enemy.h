@@ -22,7 +22,7 @@ private:
 	Vec2 pos;
 	Vec2 drawCentre;
 	RectF size = { 0,32,0,31 };
-	int tileSize = size.right;
+	int tileSize = int(size.right);
 	Vec2 vec = { 0,0 };
 	Surface sfc = { "Images\\Enemy_1_128x32.bmp" };
 	Animation animation = { int(size.left), int(size.top), int(size.right), int(size.bottom), 4, sfc, 0.08f, Colors::White };

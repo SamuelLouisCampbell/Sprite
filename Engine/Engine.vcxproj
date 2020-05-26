@@ -173,7 +173,6 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="Keyboard.cpp" />
-    <ClCompile Include="Lasers.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MainWindow.cpp" />
     <ClCompile Include="Mouse.cpp" />

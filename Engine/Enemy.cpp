@@ -53,11 +53,10 @@ RectF Enemy::GetCollisionRect() const
 
 void Enemy::TakeDamageOnHit(Lasers& laser, int damage_amount)
 {
-	if (collisionRect.IsOverlappingWith(laser.GetHitBox()) && HealthPoints > 0 && !laser.LaserHasHit() )
+	if (collisionRect.IsOverlappingWith(laser.GetHitbox()))
 	{
 		HealthPoints -= damage_amount; 
 		ActivateEffect();
-		laser.SetHitTrue();
 	}
 }
 
