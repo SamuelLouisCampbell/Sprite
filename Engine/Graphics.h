@@ -186,11 +186,30 @@ public:
 		}
 		if (rect.top > rect.bottom)
 		{
-			std::swap(rect.left, rect.right);
+			std::swap(rect.top, rect.bottom);
+		}
+		if (rect.left <= GetScreenRect().left)
+		{
+			rect.left = GetScreenRect().left;
+		}
+		if (rect.right >= GetScreenRect().right)
+		{
+			rect.right = GetScreenRect().right;
+		}
+		if (rect.top <= GetScreenRect().top)
+		{
+			rect.top = GetScreenRect().top;
+		}
+		if (rect.bottom >= GetScreenRect().bottom)
+		{
+			rect.bottom = GetScreenRect().bottom;
 		}
 		for (int i = rect.left; i < rect.right; i++)
 		{
-			for(int j = rect.top; 
+			for (int j = rect.top; j < rect.bottom; j++)
+			{
+				PutPixel(i, j, c);
+			}
 		}
 	}
 
