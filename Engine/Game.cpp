@@ -75,7 +75,7 @@ void Game::UpdateModel()
 
 void Game::ComposeFrame()
 {
-	//bg.Draw(gfx); //draw bg first...
+	bg.Draw(gfx); //draw bg first...
 	ship.Draw(gfx);
 	enemy.Draw(gfx);
 	for (auto& l : lasers)
@@ -85,6 +85,6 @@ void Game::ComposeFrame()
 	}
 	ship.Draw(gfx);
 	
-	gfx.DrawBorder(ship.GetCollisionRect(), 1, Colors::Cyan);
-	gfx.DrawBorder(enemy.GetCollisionRect(), 1, Colors::Red);
+	//gfx.DrawBorder(ship.GetCollisionRect(), 1, Colors::Cyan);
+	//gfx.DrawBorder(enemy.GetCollisionRect(), 1, Colors::Red);
 }

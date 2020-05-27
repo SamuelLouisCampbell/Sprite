@@ -6,32 +6,39 @@
 class LifeLine
 {
 public:
-	LifeLine(const RectF base_in, const Vei2 pos, const Color bc, const Color lc)
+	LifeLine(const Vec2 size, const Vec2 pos, const Color bc, const Color lc)
 		:
-		baseRect(base_in),
-		lifeRect(base_in),
+		tileSize(size),
 		pos(pos), 
 		bc(bc),
-		lc(lc)
+		lc(lc),
+		lifeLeft(pos.x + (tileSize.x / 2))
 	{}
 
 	void Draw(Graphics& gfx)
 	{
-
 		gfx.DrawRect(baseRect, bc);
 		gfx.DrawRect(lifeRect, lc);
 	}
-	void Update(const int life, const int maxLife)
+	void UpdatePos(Vec2& pos_in)
+	{
+		pos = pos_in; 
+		baseRect = { pos.x - (tileSize.x / 2), pos.x + (tileSize.x / 2), pos.y - (tileSize.y / 2), pos.y + (tileSize.y / 2) };
+		lifeRect = { pos.x - (tileSize.x / 2), lifeLeft, pos.y - (tileSize.y / 2), pos.y + (tileSize.y / 2) };
+	}
+	void UpdateDraw(const int life, const int maxLife)
 	{
 		fractional =  float(life) / float(maxLife);
-		lifeRect.right = lifeRect.left + (baseRect.GetWidth() * fractional); 
+		lifeLeft = lifeRect.left + (baseRect.GetWidth() * fractional); 
 	}
 private:
 	float fractional = 1.0f;
-	Vei2 pos; 
+	Vec2 pos; 
+	Vec2 tileSize;
 	RectF baseRect;
 	RectF lifeRect;
 	Color bc;
 	Color lc;
+	float lifeLeft;
 };
 

@@ -10,7 +10,7 @@ void Enemy::Draw(Graphics& gfx)
 {
 	if (HealthPoints > 0)
 	{
-		ll.Draw(gfx);
+		
 		// if effect active, draw sprite replacing opaque pixels with red
 		if (effectActive)
 		{
@@ -19,6 +19,10 @@ void Enemy::Draw(Graphics& gfx)
 		else
 		{
 			animation.Draw((Vei2)drawCentre, gfx, false, true);
+		}
+		if (HealthPoints < maxHP)
+		{
+		ll.Draw(gfx);
 		}
 	}
 }
@@ -39,6 +43,10 @@ void Enemy::Update(float dt)
 		}
 	}
 	collisionRect = { pos.x - (tileSize / 4), pos.x + (tileSize / 4), pos.y - (tileSize / 4), pos.y + (tileSize / 4) };
+	
+	llPos = pos; 
+	llPos.y += llY_off;
+	ll.UpdatePos(llPos);
 }
 
 void Enemy::ActivateEffect()
@@ -55,7 +63,7 @@ RectF Enemy::GetCollisionRect() const
 void Enemy::TakeDamageOnHit(int damage_amount)
 {
 		HealthPoints -= damage_amount; 
-		ll.Update(HealthPoints, maxHP);
+		ll.UpdateDraw(HealthPoints, maxHP);
 		ActivateEffect();
 }
 

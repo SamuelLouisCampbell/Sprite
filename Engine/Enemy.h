@@ -36,7 +36,8 @@ private:
 	static constexpr int maxHP = 200; 
 	int HealthPoints = maxHP;
 	RectF collisionRect;
-	RectF llRect = { 250,300,200,203 };
-	LifeLine ll = { llRect,{0,0},Colors::Red,Colors::Gray };
+	Vec2 llPos; 
+	float llY_off = -25.0f; 
+	LifeLine ll = { {30, 2},pos,Colors::Black,Colors::Red };
 };
 
