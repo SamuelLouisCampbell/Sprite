@@ -5,6 +5,7 @@
 #include "Rect.h"
 #include "Animation.h"
 #include "Lasers.h"
+#include "LifeLine.h"
 
 
 class Enemy
@@ -16,6 +17,7 @@ public:
 	RectF GetCollisionRect() const;
 	void TakeDamageOnHit(int damage_amount);
 	bool IsAlive() const;
+	int GetHP()const;
 
 private:
 	Vec2 pos;
@@ -29,8 +31,10 @@ private:
 	static constexpr float effectDuration = 0.045f;
 	float effectTime = 0.0f;
 	bool effectActive = false;
-	int HealthPoints = 100; 
+	int HealthPoints = 200; 
 	RectF collisionRect;
 	void ActivateEffect();
+	RectF llRect = { 250,300,200,203 };
+	LifeLine ll = { llRect,{0,0},Colors::Red,Colors::Blue };
 };
 

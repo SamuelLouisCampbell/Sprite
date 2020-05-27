@@ -10,6 +10,7 @@ void Enemy::Draw(Graphics& gfx)
 {
 	if (HealthPoints > 0)
 	{
+		ll.Draw(gfx);
 		// if effect active, draw sprite replacing opaque pixels with red
 		if (effectActive)
 		{
@@ -54,10 +55,16 @@ RectF Enemy::GetCollisionRect() const
 void Enemy::TakeDamageOnHit(int damage_amount)
 {
 		HealthPoints -= damage_amount; 
+		ll.Update(HealthPoints);
 		ActivateEffect();
 }
 
 bool Enemy::IsAlive() const
 {
 	return HealthPoints > 0; 
+}
+
+int Enemy::GetHP() const
+{
+	return HealthPoints;
 }
