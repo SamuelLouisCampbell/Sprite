@@ -20,6 +20,8 @@ public:
 	int GetHP()const;
 
 private:
+	void ActivateEffect();
+private:
 	Vec2 pos;
 	Vec2 drawCentre;
 	RectF size = { 0,32,0,31 };
@@ -31,10 +33,10 @@ private:
 	static constexpr float effectDuration = 0.045f;
 	float effectTime = 0.0f;
 	bool effectActive = false;
-	int HealthPoints = 200; 
+	static constexpr int maxHP = 200; 
+	int HealthPoints = maxHP;
 	RectF collisionRect;
-	void ActivateEffect();
 	RectF llRect = { 250,300,200,203 };
-	LifeLine ll = { llRect,{0,0},Colors::Red,Colors::Blue };
+	LifeLine ll = { llRect,{0,0},Colors::Red,Colors::Gray };
 };
 

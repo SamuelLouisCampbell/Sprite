@@ -64,8 +64,8 @@ void Game::UpdateModel()
 	{
 		if (lasers[i].GetHitbox().IsOverlappingWith(enemy_hitbox) && enemy.IsAlive())
 		{
-			remove_element(lasers, i);
 			enemy.TakeDamageOnHit(25);
+			remove_element(lasers, i);
 			continue;
 		}
 		i++;
@@ -75,7 +75,7 @@ void Game::UpdateModel()
 
 void Game::ComposeFrame()
 {
-	bg.Draw(gfx); //draw bg first...
+	//bg.Draw(gfx); //draw bg first...
 	ship.Draw(gfx);
 	enemy.Draw(gfx);
 	for (auto& l : lasers)

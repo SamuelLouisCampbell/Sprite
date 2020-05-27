@@ -55,7 +55,7 @@ RectF Enemy::GetCollisionRect() const
 void Enemy::TakeDamageOnHit(int damage_amount)
 {
 		HealthPoints -= damage_amount; 
-		ll.Update(HealthPoints);
+		ll.Update(HealthPoints, maxHP);
 		ActivateEffect();
 }
 
