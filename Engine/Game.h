@@ -53,6 +53,7 @@ private:
 private:
 	MainWindow& wnd;
 	Graphics gfx;
+    Sound bgSound = { L"Sounds\\BgMusic.wav", 0.0f, 14.045f };
 	/********************************/
 	/*  User Variables              */
 	FrameTimer ft;

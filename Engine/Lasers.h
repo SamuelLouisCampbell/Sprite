@@ -1,7 +1,7 @@
 #pragma once
 #include "Animation.h"
 #include "Vec2.h"
-#include "SpriteEffect.h"
+#include "SoundEffect.h"
 
 class Lasers
 {
@@ -13,7 +13,9 @@ public:
 		laser_animation(0,8,8,8,4,laser,0.02f,Colors::White),
 		pos(pos),
 		vel(dir)
-	{}
+	{
+		sfx.Play(rng, 0.5f);
+	}
 	void Draw(Graphics& gfx) const
 	{
 		// calculate drawing base
@@ -48,6 +50,8 @@ public:
 		return *this;
 	}
 private:
+	std::mt19937 rng = std::mt19937(std::random_device{}());
+	SoundEffect sfx = SoundEffect({ L"Sounds\\Laser.wav"},true, 0.1f);
 	Surface laser;
 	Animation laser_animation;
 	Vec2 pos;

@@ -11,7 +11,7 @@
 class Enemy
 {
 public:
-	Enemy(const Vec2& pos);
+	Enemy(const Vec2& pos, const RectI& reboundRect);
 	void Draw(Graphics& gfx);
 	void Update(float dt);
 	RectF GetCollisionRect() const;
@@ -22,6 +22,7 @@ public:
 private:
 	void ActivateEffect();
 private:
+	RectI reboundRect; 
 	Vec2 pos;
 	Vec2 drawCentre;
 	RectF size = { 0,32,0,31 };
@@ -33,7 +34,7 @@ private:
 	static constexpr float effectDuration = 0.045f;
 	float effectTime = 0.0f;
 	bool effectActive = false;
-	static constexpr int maxHP = 200; 
+	static constexpr int maxHP = 100; 
 	int HealthPoints = maxHP;
 	RectF collisionRect;
 	Vec2 llPos; 

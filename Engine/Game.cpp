@@ -25,8 +25,10 @@ Game::Game( MainWindow& wnd )
 	:
 	wnd( wnd ),
 	gfx( wnd ),
-	enemy({200,100})
+	enemy({ 200,200 }, gfx.GetScreenRect())
+
 {
+	bgSound.Play(1.0f, 0.5f);
 }
 
 void Game::Go()
@@ -65,6 +67,11 @@ void Game::UpdateModel()
 		if (lasers[i].GetHitbox().IsOverlappingWith(enemy_hitbox) && enemy.IsAlive())
 		{
 			enemy.TakeDamageOnHit(25);
+			remove_element(lasers, i);
+			continue;
+		}
+		else if (lasers[i].GetHitbox().bottom < gfx.GetScreenRect().top)
+		{
 			remove_element(lasers, i);
 			continue;
 		}

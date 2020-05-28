@@ -1,10 +1,10 @@
 #include "Enemy.h"
 
-Enemy::Enemy(const Vec2& pos)
+Enemy::Enemy(const Vec2& pos, const RectI& reboundRect)
 	:
-	pos(pos)
-{
-}
+	pos(pos),
+	reboundRect(reboundRect)
+{}
 
 void Enemy::Draw(Graphics& gfx)
 {
