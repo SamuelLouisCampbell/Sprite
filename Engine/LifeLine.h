@@ -24,12 +24,19 @@ public:
 	{
 		pos = pos_in; 
 		baseRect = { pos.x - (tileSize.x / 2), pos.x + (tileSize.x / 2), pos.y - (tileSize.y / 2), pos.y + (tileSize.y / 2) };
-		lifeRect = { pos.x - (tileSize.x / 2), lifeLeft, pos.y - (tileSize.y / 2), pos.y + (tileSize.y / 2) };
+		lifeRect = { 
+			pos.x - (tileSize.x / 2), 
+			pos.x - (tileSize.x / 2) + (baseRect.GetWidth() * fractional),
+			pos.y - (tileSize.y / 2), 
+			pos.y + (tileSize.y / 2) 
+				};
+		
+		
 	}
 	void UpdateDraw(const int life, const int maxLife)
 	{
 		fractional =  float(life) / float(maxLife);
-		lifeLeft = lifeRect.left + (baseRect.GetWidth() * fractional); 
+		//lifeLeft = lifeRect.left + (baseRect.GetWidth() * fractional); 
 	}
 private:
 	float fractional = 1.0f;
@@ -40,5 +47,6 @@ private:
 	Color bc;
 	Color lc;
 	float lifeLeft;
+	bool isInit = false;
 };
 

@@ -26,7 +26,7 @@ private:
 	Vec2 drawCentre;
 	RectF size = { 0,32,0,31 };
 	int tileSize = int(size.right);
-	Vec2 vec = { 0,0 };
+	Vec2 vec = { 50.0f,0 };
 	Surface sfc = { "Images\\Enemy_1_128x32.bmp" };
 	Animation animation = { int(size.left), int(size.top), int(size.right), int(size.bottom), 4, sfc, 0.08f, Colors::White };
 	float speed = 110.0f;
@@ -39,5 +39,6 @@ private:
 	Vec2 llPos; 
 	float llY_off = -25.0f; 
 	LifeLine ll = { {30, 2},pos,Colors::Black,Colors::Red };
+
 };
 
