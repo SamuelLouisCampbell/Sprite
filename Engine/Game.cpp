@@ -24,11 +24,11 @@
 Game::Game( MainWindow& wnd )
 	:
 	wnd( wnd ),
-	gfx( wnd ),
-	enemy({ 200,200 }, gfx.GetScreenRect())
+	gfx( wnd )
 
 {
 	bgSound.Play(1.0f, 0.5f);
+
 }
 
 void Game::Go()
@@ -47,6 +47,22 @@ void Game::UpdateModel()
 	const float dt = 1.0f / 60.0f;
 #endif
 
+	if (launchEnemyWave)
+	{
+		std::random_device rd;
+		std::mt19937 rng(rd());
+		std::uniform_real_distribution<float> xDist(gfx.GetScreenRect().left, gfx.GetScreenRect().right);
+		std::uniform_real_distribution<float> yDist(gfx.GetScreenRect().top, gfx.GetScreenRect().bottom);
+		
+		for (int i = 0; i < 2; i++)
+		{
+			int a = 32; 
+			Vec2 pos = {float(200 + a), float(200)};
+			enemies.emplace_back(pos , gfx.GetScreenRect());
+			a += 32;
+		}
+		launchEnemyWave = false; 
+	}
 
 	const auto e = wnd.mouse.Read();
 	if (e.GetType() == Mouse::Event::Type::LPress)
@@ -58,39 +74,47 @@ void Game::UpdateModel()
 	{
 		l.Update(dt);
 	}
+
 	ship.SetPos(wnd.mouse.GetPosF());
 	ship.Update({ 0,0 }, dt);
-	enemy.Update(dt);
-	const auto enemy_hitbox = enemy.GetCollisionRect();
-	for (size_t i = 0u; i < lasers.size(); )
+	for (auto& e : enemies)
 	{
-		if (lasers[i].GetHitbox().IsOverlappingWith(enemy_hitbox) && enemy.IsAlive())
+		e.Update(dt);
+	
+		const auto enemy_hitbox = e.GetCollisionRect();
+		for (size_t i = 0u; i < lasers.size(); )
 		{
-			enemy.TakeDamageOnHit(25);
-			remove_element(lasers, i);
-			continue;
+			if (lasers[i].GetHitbox().IsOverlappingWith(enemy_hitbox) && e.IsAlive())
+			{
+				e.TakeDamageOnHit(25);
+				remove_element(lasers, i);
+				continue;
+			}
+			else if (lasers[i].GetHitbox().bottom < gfx.GetScreenRect().top)
+			{
+				remove_element(lasers, i);
+				continue;
+			}
+			i++;
 		}
-		else if (lasers[i].GetHitbox().bottom < gfx.GetScreenRect().top)
-		{
-			remove_element(lasers, i);
-			continue;
-		}
-		i++;
 	}
 
 }
 
 void Game::ComposeFrame()
 {
-	bg.Draw(gfx); //draw bg first...
+	//bg.Draw(gfx); //draw bg first...
 	ship.Draw(gfx);
-	enemy.Draw(gfx);
+	for (auto& e : enemies)
+	{
+		e.Draw(gfx);
+	}
+	
 	for (auto& l : lasers)
 	{
 		l.Draw(gfx);
 		//gfx.DrawBorder(l.GetHitbox(), 1, Colors::Green);
 	}
-	ship.Draw(gfx);
 	
 	//gfx.DrawBorder(ship.GetCollisionRect(), 1, Colors::Cyan);
 	//gfx.DrawBorder(enemy.GetCollisionRect(), 1, Colors::Red);

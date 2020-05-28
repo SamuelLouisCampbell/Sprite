@@ -35,6 +35,7 @@
 #include <vector>
 #include "Utility.h"
 #include "LifeLine.h"
+#include <random>
 
 
 class Game
@@ -47,22 +48,20 @@ public:
 private:
 	void ComposeFrame();
 	void UpdateModel();
-	/********************************/
-	/*  User Functions              */
-	/********************************/
+
 private:
+   
 	MainWindow& wnd;
 	Graphics gfx;
-    Sound bgSound = { L"Sounds\\BgMusic.wav", 0.0f, 14.045f };
-	/********************************/
-	/*  User Variables              */
+    Sound bgSound = { L"Sounds\\BgMusic.wav", 0.0f, 14.0f };
 	FrameTimer ft;
     Background bg = { "Images\\SpaceBGmirror.bmp" };
 	Sound hit = L"Sounds\\hit.wav";
     Ship ship = { {400,300}, "Images\\Shipwithparts_512x256.bmp", 64};
     Vec2 shipVel = { 0,0 };
-    Enemy enemy; 
+    std::vector<Enemy> enemies;
     std::vector<Lasers> lasers;
+    bool launchEnemyWave = true;
 
 
     
