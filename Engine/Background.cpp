@@ -1,8 +1,9 @@
 #include "Background.h"
 
-Background::Background(const std::string filename)
+Background::Background(const std::string filename, const RectI& clipRect)
 	:
-	bg0(filename)
+	bg0(filename), 
+	clipRect(clipRect)
 {
 	startPos0.y = float(-bg0.GetHeight());
 	startPos0.x = 0; 
@@ -22,8 +23,8 @@ void Background::Draw(Graphics& gfx)
 	{
 		startPos0.y = float(-bg0.GetHeight());
 	}
-	gfx.DrawSprite(int(startPos0.x), int(startPos0.y), bg0, SpriteEffect::Copy{}, false, false);
-	gfx.DrawSprite(int(startPos1.x), int(startPos1.y), bg0, SpriteEffect::Copy{}, false, false);
+	gfx.DrawSprite(int(startPos0.x), int(startPos0.y),bg0.GetRect(), clipRect ,bg0, SpriteEffect::Copy{}, false, false);
+	gfx.DrawSprite(int(startPos1.x), int(startPos1.y),bg0.GetRect(), clipRect, bg0, SpriteEffect::Copy{}, false, false);
 }
 
 void Background::Update()

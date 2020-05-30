@@ -30,7 +30,7 @@ private:
 	Vec2 drawCentre;
 	int tileSize = int(size.right);
 	Vec2 vec = { 200,200 };
-	float speed = 10.0f;
+	float speed = 100.0f;
 	static constexpr float effectDuration = 0.045f;
 	float effectTime = 0.0f;
 	bool effectActive = false;

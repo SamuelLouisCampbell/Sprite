@@ -18,7 +18,7 @@ private:
 		shieldedBomber
 	};
 public:
-	Ship(const Vec2& pos, int tileSize, const Surface& sfc);
+	Ship(const Vec2& pos, int tileSize, const Surface& sfc, const RectI& bounds);
 	void Draw(Graphics& gfx) const;
 	void Update(const Vec2& vel, float deltaTime);
 	void TakeDamage(int amount);
@@ -41,6 +41,7 @@ private:
 	Vei2 DrawReigonEnd = { topCorner.x + tileSize,topCorner.y + tileSize };
 	RectI drawSelect = {topCorner, DrawReigonEnd};
 	RectF collisionRect;
+	RectI bounds; 
 
 	static constexpr float effectDuration = 0.045f;
 	float effectTime = 0.0f;

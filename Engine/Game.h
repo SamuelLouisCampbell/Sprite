@@ -55,9 +55,10 @@ private:
 	MainWindow& wnd;
 	Graphics gfx;
     SpriteDump sprites;
+    RectI gameField = { 50,750,50,550 };
     Sound bgSound = { L"Sounds\\BgMusic.wav", 0.0f, 14.0f };
 	FrameTimer ft;
-    Background bg = { "Images\\SpaceBGmirror.bmp" };
+    Background bg = { "Images\\SpaceBGmirror.bmp", gameField };
 	Sound hit = L"Sounds\\hit.wav";
     Ship ship; 
     Vec2 shipVel = { 0,0 };

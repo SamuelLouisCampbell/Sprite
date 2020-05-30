@@ -25,7 +25,7 @@ Game::Game( MainWindow& wnd )
 	:
 	wnd( wnd ),
 	gfx( wnd ), 
-	ship({400,300}, sprites.ship0Tile , sprites.shipSurface0)
+	ship({400,300}, sprites.ship0Tile , sprites.shipSurface0, gameField)
 
 {
 	bgSound.Play(1.0f, 0.5f);
@@ -59,7 +59,7 @@ void Game::UpdateModel()
 		{
 			int a = 32; 
 			Vec2 pos = {float(200 + a), float(200)};
-			enemies.emplace_back(pos , gfx.GetScreenRect(), sprites.enemySurface0);
+			enemies.emplace_back(pos , gameField, sprites.enemySurface0);
 			a += 32;
 		}
 		launchEnemyWave = false; 
@@ -91,7 +91,7 @@ void Game::UpdateModel()
 				remove_element(lasers, i);
 				continue;
 			}
-			else if (lasers[i].GetHitbox().bottom < gfx.GetScreenRect().top)
+			else if (lasers[i].GetHitbox().bottom < gameField.top)
 			{
 				remove_element(lasers, i);
 				continue;
@@ -104,11 +104,13 @@ void Game::UpdateModel()
 
 void Game::ComposeFrame()
 {
-	//bg.Draw(gfx); //draw bg first...
+	bg.Draw(gfx); //draw bg first...
+	gfx.DrawBorder(gameField, 2, Colors::Cyan);
 	ship.Draw(gfx);
 	for (auto& e : enemies)
 	{
 		e.Draw(gfx);
+		//gfx.DrawBorder(e.GetCollisionRect(), 1, Colors::Red);
 	}
 	
 	for (auto& l : lasers)
@@ -118,5 +120,5 @@ void Game::ComposeFrame()
 	}
 	
 	//gfx.DrawBorder(ship.GetCollisionRect(), 1, Colors::Cyan);
-	//gfx.DrawBorder(enemy.GetCollisionRect(), 1, Colors::Red);
+	
 }

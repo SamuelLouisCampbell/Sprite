@@ -373,6 +373,11 @@ void Graphics::DrawBorder(RectF rect, int stroke, Color c)
 	DrawBorder(int(rect.left), int(rect.top), int(rect.right - rect.left), int(rect.bottom - rect.top), stroke, c);
 }
 
+void Graphics::DrawBorder(RectI rect, int stroke, Color c)
+{
+	DrawBorder (rect.left, rect.top, rect.right - rect.left, rect.bottom - rect.top, stroke, c);
+}
+
 
 
 //////////////////////////////////////////////////

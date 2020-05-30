@@ -5,7 +5,8 @@ Enemy::Enemy(const Vec2& pos, const RectI& reboundRect, const Surface& sfc)
 	pos(pos),
 	reboundRect(reboundRect), 
 	sfc(sfc),
-	animation({ int(size.left), int(size.top), int(size.right), int(size.bottom), 4, sfc, 0.08f, Colors::White })
+	animation({ int(size.left), int(size.top), int(size.right), int(size.bottom), 4, sfc, 0.08f, Colors::White }),
+	collisionRect({ pos.x - (tileSize / 2), pos.x + (tileSize / 2), pos.y - (tileSize / 2), pos.y + (tileSize / 2) })
 {
 	std::random_device rd;
 	std::mt19937 rng(rd());
@@ -51,10 +52,27 @@ void Enemy::Update(float dt)
 			effectActive = false;
 		}
 	}
-	collisionRect = { pos.x - (tileSize / 4), pos.x + (tileSize / 4), pos.y - (tileSize / 4), pos.y + (tileSize / 4) };
+	collisionRect = { pos.x - (tileSize / 2), pos.x + (tileSize / 2), pos.y - (tileSize / 2), pos.y + (tileSize / 2) };
 	llPos = pos; 
 	llPos.y += llY_off;
 	ll.UpdatePos(llPos);
+
+	if (collisionRect.left <= reboundRect.left)
+	{
+		vec.x = -vec.x;
+	}
+	else if (collisionRect.right >= reboundRect.right)
+	{
+		vec.x = -vec.x;
+	}
+	if (collisionRect.top <= reboundRect.top)
+	{
+		vec.y = -vec.y;
+	}
+	else if (collisionRect.bottom >= reboundRect.bottom)
+	{
+		vec.y = -vec.y;
+	}
 }
 
 void Enemy::ActivateEffect()

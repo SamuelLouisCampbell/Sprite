@@ -8,7 +8,7 @@
 class Background
 {
 public:
-	Background(const std::string filename);
+	Background(const std::string filename, const RectI& clipRect );
 	void Draw(Graphics& gfx);
 	void Update();
 	void SetBgSpeeg(const float speed);
@@ -18,5 +18,6 @@ private:
 	float scrollSpeed = 3.0f;
 	Vec2 startPos0;
 	Vec2 startPos1;
+	RectI clipRect;
 };
 
