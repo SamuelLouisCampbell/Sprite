@@ -1,9 +1,9 @@
 #include "Ship.h"
 
-Ship::Ship(const Vec2& pos,const std::string filename, int tileSize)
+Ship::Ship(const Vec2& pos, int tileSize, const Surface& sfc)
 	:
+	sprite(sfc),
 	pos(pos),
-	sprite(filename),
 	tileSize(tileSize)
 {
 }

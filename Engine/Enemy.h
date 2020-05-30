@@ -11,7 +11,7 @@
 class Enemy
 {
 public:
-	Enemy(const Vec2& pos, const RectI& reboundRect);
+	Enemy(const Vec2& pos, const RectI& reboundRect, const Surface& sfc);
 	void Draw(Graphics& gfx);
 	void Update(float dt);
 	RectF GetCollisionRect() const;

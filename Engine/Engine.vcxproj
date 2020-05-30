@@ -149,6 +149,7 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="LifeLine.h" />
+    <ClInclude Include="SpriteDump.h" />
     <ClInclude Include="Utility.h" />
     <ClInclude Include="Lasers.h" />
     <ClInclude Include="Ship.h" />
@@ -180,6 +181,7 @@
     <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="Ship.cpp" />
     <ClCompile Include="Sound.cpp" />
+    <ClCompile Include="SpriteDump.cpp" />
     <ClCompile Include="Surface.cpp" />
   </ItemGroup>
   <ItemGroup>

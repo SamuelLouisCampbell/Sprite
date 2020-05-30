@@ -1,16 +1,16 @@
 #include "Enemy.h"
 
-Enemy::Enemy(const Vec2& pos, const RectI& reboundRect)
+Enemy::Enemy(const Vec2& pos, const RectI& reboundRect, const Surface& sfc)
 	:
 	pos(pos),
 	reboundRect(reboundRect), 
-	sfc("Images\\Enemy_1_128x32.bmp"), 
+	sfc(sfc),
 	animation({ int(size.left), int(size.top), int(size.right), int(size.bottom), 4, sfc, 0.08f, Colors::White })
 {
 	std::random_device rd;
 	std::mt19937 rng(rd());
-	std::uniform_real_distribution<float> xDist(0, speed);
-	std::uniform_real_distribution<float> yDist(0, speed);
+	std::uniform_real_distribution<float> xDist(-speed, speed);
+	std::uniform_real_distribution<float> yDist(-speed, speed);
 	
 	vec = { xDist(rng), yDist(rng) };
 }
@@ -23,11 +23,11 @@ void Enemy::Draw(Graphics& gfx)
 		// if effect active, draw sprite replacing opaque pixels with red
 		if (effectActive)
 		{
-			animation.DrawColor((Vei2)drawCentre, gfx, Colors::Red, false, false);
+			animation.DrawColor((Vei2)drawCentre, gfx, Colors::Red, false, true);
 		}
 		else
 		{
-			animation.Draw((Vei2)drawCentre, gfx, false, false);
+			animation.Draw((Vei2)drawCentre, gfx, false, true);
 		}
 		if (HealthPoints < maxHP)
 		{

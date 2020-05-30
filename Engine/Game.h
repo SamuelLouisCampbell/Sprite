@@ -36,6 +36,7 @@
 #include "Utility.h"
 #include "LifeLine.h"
 #include <random>
+#include "SpriteDump.h"
 
 
 class Game
@@ -53,11 +54,12 @@ private:
    
 	MainWindow& wnd;
 	Graphics gfx;
+    SpriteDump sprites;
     Sound bgSound = { L"Sounds\\BgMusic.wav", 0.0f, 14.0f };
 	FrameTimer ft;
     Background bg = { "Images\\SpaceBGmirror.bmp" };
 	Sound hit = L"Sounds\\hit.wav";
-    Ship ship = { {400,300}, "Images\\Shipwithparts_512x256.bmp", 64};
+    Ship ship; 
     Vec2 shipVel = { 0,0 };
     std::vector<Enemy> enemies;
     std::vector<Lasers> lasers;

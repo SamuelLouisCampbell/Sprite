@@ -7,10 +7,12 @@ class Lasers
 {
 public:
 
-	Lasers(const Vec2& pos, const Vec2& dir)
+	Lasers(const Vec2& pos, const Vec2& dir, const Surface& sfc, const int tileSize, const int frames)
 		:
-		laser("Images\\Lasers_64x32.bmp"),
-		laser_animation(0,8,8,8,4,laser,0.02f,Colors::White),
+		tileSize(tileSize),
+		frames(frames),
+		laser(sfc),
+		laser_animation(0,tileSize,tileSize,tileSize,frames,laser,0.02f,Colors::White),
 		pos(pos),
 		vel(dir)
 	{
@@ -38,8 +40,10 @@ public:
 	}
 	Lasers(const Lasers& src)
 		:
+		tileSize(src.tileSize),
+		frames(src.frames),
 		laser(src.laser),
-		laser_animation(0, 8, 8, 8, 4, laser, 0.02f, Colors::White),
+		laser_animation(0, src.tileSize, src.tileSize, src.tileSize, src.frames, laser, 0.02f, Colors::White),
 		pos(src.pos),
 		vel(src.vel)
 	{}
@@ -50,6 +54,8 @@ public:
 		return *this;
 	}
 private:
+	int tileSize; 
+	int frames; 
 	std::mt19937 rng = std::mt19937(std::random_device{}());
 	SoundEffect sfx = SoundEffect({ L"Sounds\\Laser.wav"},true, 0.1f);
 	Surface laser;

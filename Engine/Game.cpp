@@ -24,7 +24,8 @@
 Game::Game( MainWindow& wnd )
 	:
 	wnd( wnd ),
-	gfx( wnd )
+	gfx( wnd ), 
+	ship({400,300}, sprites.ship0Tile , sprites.shipSurface0)
 
 {
 	bgSound.Play(1.0f, 0.5f);
@@ -54,11 +55,11 @@ void Game::UpdateModel()
 		std::uniform_real_distribution<float> xDist(gfx.GetScreenRect().left, gfx.GetScreenRect().right);
 		std::uniform_real_distribution<float> yDist(gfx.GetScreenRect().top, gfx.GetScreenRect().bottom);
 		
-		for (int i = 0; i < 2; i++)
+		for (int i = 0; i < 10; i++)
 		{
 			int a = 32; 
 			Vec2 pos = {float(200 + a), float(200)};
-			enemies.emplace_back(pos , gfx.GetScreenRect());
+			enemies.emplace_back(pos , gfx.GetScreenRect(), sprites.enemySurface0);
 			a += 32;
 		}
 		launchEnemyWave = false; 
@@ -68,7 +69,7 @@ void Game::UpdateModel()
 	if (e.GetType() == Mouse::Event::Type::LPress)
 	{
 		Vec2 lasVec = { 0.0f, -300.0f };
-		lasers.emplace_back(ship.GetPos(),lasVec);
+		lasers.emplace_back(ship.GetPos(),lasVec, sprites.laserSurface0, sprites.laser0Tile, sprites.laser0Frames);
 	}
 	for (auto& l : lasers)
 	{

@@ -18,7 +18,7 @@ private:
 		shieldedBomber
 	};
 public:
-	Ship(const Vec2& pos, const std::string filename, int tileSize);
+	Ship(const Vec2& pos, int tileSize, const Surface& sfc);
 	void Draw(Graphics& gfx) const;
 	void Update(const Vec2& vel, float deltaTime);
 	void TakeDamage(int amount);
