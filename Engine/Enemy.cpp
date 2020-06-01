@@ -1,19 +1,20 @@
 #include "Enemy.h"
 
-Enemy::Enemy(const Vec2& pos, const RectI& reboundRect, const Surface& sfc)
+Enemy::Enemy(const Vec2& pos, const RectI& reboundRect, const Surface& sfc, const Surface& explosion_sfc)
 	:
 	pos(pos),
 	reboundRect(reboundRect), 
 	sfc(sfc),
 	animation({ int(size.left), int(size.top), int(size.right), int(size.bottom), 4, sfc, 0.08f, Colors::White }),
 	collisionRect({ pos.x - (tileSize / 2), pos.x + (tileSize / 2), pos.y - (tileSize / 2), pos.y + (tileSize / 2) })
+	
 {
 	std::random_device rd;
 	std::mt19937 rng(rd());
 	std::uniform_real_distribution<float> xDist(-speed, speed);
 	std::uniform_real_distribution<float> yDist(-speed, speed);
-	
 	vec = { xDist(rng), yDist(rng) };
+	exp = std::make_unique<Explosion>(pos, explosion_sfc, 64, 8);
 }
 
 void Enemy::Draw(Graphics& gfx)
@@ -34,13 +35,20 @@ void Enemy::Draw(Graphics& gfx)
 		{
 		ll.Draw(gfx);
 		}
+		
+	}
+	else if(HealthPoints <=0 )
+	{
+		exp->Draw(gfx);
 	}
 }
 
 void Enemy::Update(float dt)
 {
+
 	drawCentre = { pos.x - (tileSize / 2), pos.y - (tileSize / 2) };
 	pos += vec * dt;
+
 	animation.Update(dt);
 	// update effect time if active
 	if (effectActive)
@@ -52,10 +60,15 @@ void Enemy::Update(float dt)
 			effectActive = false;
 		}
 	}
+	if (HealthPoints <= 0)
+	{
+		exp->Update(dt, pos);
+	}
 	collisionRect = { pos.x - (tileSize / 2), pos.x + (tileSize / 2), pos.y - (tileSize / 2), pos.y + (tileSize / 2) };
 	llPos = pos; 
 	llPos.y += llY_off;
 	ll.UpdatePos(llPos);
+
 
 	if (collisionRect.left <= reboundRect.left)
 	{
@@ -73,6 +86,12 @@ void Enemy::Update(float dt)
 	{
 		vec.y = -vec.y;
 	}
+
+	if (HealthPoints <= 0 && !exp->GetPlay())
+	{
+		exp->SetPlay(true);
+	}
+
 }
 
 void Enemy::ActivateEffect()
@@ -101,4 +120,9 @@ bool Enemy::IsAlive() const
 int Enemy::GetHP() const
 {
 	return HealthPoints;
+}
+
+Vec2 Enemy::GetPos() const
+{
+	return pos;
 }

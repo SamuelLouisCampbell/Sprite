@@ -29,6 +29,11 @@ void Animation::DrawColor( const Vei2& pos,Graphics& gfx,Color c, bool mirrorX, 
 	gfx.DrawSprite(pos.x, pos.y, frames[iCurFrame], *sprite, SpriteEffect::Substitution{Colors::White, Colors::Red }, mirrorX, mirrorY);
 }
 
+void Animation::DrawInvert(const Vei2& pos, Graphics& gfx, bool mirrorX, bool mirrorY) const
+{
+	gfx.DrawSprite(pos.x, pos.y, frames[iCurFrame], *sprite, SpriteEffect::Invert{ chroma }, mirrorX, mirrorY);
+}
+
 void Animation::Update( float dt )
 {
 	curFrameTime += dt;
@@ -37,6 +42,11 @@ void Animation::Update( float dt )
 		Advance();
 		curFrameTime -= holdTime;
 	}
+}
+
+int Animation::GetFrameCount() const
+{
+	return iCurFrame;
 }
 
 void Animation::Advance()

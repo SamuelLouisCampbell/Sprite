@@ -16,5 +16,13 @@ public:
 	static constexpr int ship0Tile = 64;
 	static constexpr int ship0Frames = 1;
 
+	const Surface explosionSurface0 = ("Images\\explosion-1_512x64.bmp");
+	static constexpr int exp0Tile = 64;
+	static constexpr int exp0Frames = 8;
+
+	const Surface explosionSurface1 = ("Images\\explosion-6.bmp");
+	static constexpr int exp1Tile = 32;
+	static constexpr int exp1Frames = 8;
+
 };
 

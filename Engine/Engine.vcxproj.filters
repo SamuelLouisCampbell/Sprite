@@ -16,6 +16,9 @@
     <Filter Include="Shaders">
       <UniqueIdentifier>{8b6c92a8-f65d-451e-80e3-d65773602b92}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\Sounds">
+      <UniqueIdentifier>{482042cd-9a16-43b4-87e1-1587362ac774}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ChiliWin.h">
@@ -97,6 +100,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SpriteDump.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Explosion.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -203,5 +209,37 @@
     <Image Include="Images\SpaceBGmirror.bmp">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="Images\explosion-1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\explosion-6.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="Sounds\hit.wav">
+      <Filter>Resource Files\Sounds</Filter>
+    </Media>
+    <Media Include="Sounds\Ice attack 2.wav">
+      <Filter>Resource Files\Sounds</Filter>
+    </Media>
+    <Media Include="Sounds\impact.wav">
+      <Filter>Resource Files\Sounds</Filter>
+    </Media>
+    <Media Include="Sounds\Laser.wav">
+      <Filter>Resource Files\Sounds</Filter>
+    </Media>
+    <Media Include="Sounds\Misc 02.wav">
+      <Filter>Resource Files\Sounds</Filter>
+    </Media>
+    <Media Include="Sounds\Wind effects 5.wav">
+      <Filter>Resource Files\Sounds</Filter>
+    </Media>
+    <Media Include="Sounds\BgMusic.wav">
+      <Filter>Resource Files\Sounds</Filter>
+    </Media>
+    <Media Include="Sounds\Healing Full.wav">
+      <Filter>Resource Files\Sounds</Filter>
+    </Media>
   </ItemGroup>
 </Project>

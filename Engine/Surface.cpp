@@ -41,7 +41,7 @@ Surface::Surface( const std::string& filename )
 		dy = -1;
 	}
 
-	pPixels = new Color[width*height];
+	pPixels = std::make_unique<Color[]>(width * height);
 
 	file.seekg( bmFileHeader.bfOffBits );
 	// padding is for the case of of 24 bit depth only
@@ -82,25 +82,20 @@ Surface::Surface( const Surface& rhs )
 		pPixels[i] = rhs.pPixels[i];
 	}
 }
-
-Surface::~Surface()
-{
-	delete [] pPixels;
-	pPixels = nullptr;
-}
-
 Surface& Surface::operator=( const Surface& rhs )
 {
-	width = rhs.width;
-	height = rhs.height;
-
-	delete [] pPixels;
-	pPixels = new Color[width*height];
-
-	const int nPixels = width * height;
-	for( int i = 0; i < nPixels; i++ )
+	if (&rhs != this)
 	{
-		pPixels[i] = rhs.pPixels[i];
+		width = rhs.width;
+		height = rhs.height;
+
+		pPixels = std::make_unique<Color[]>(width * height);
+
+		const int nPixels = width * height;
+		for( int i = 0; i < nPixels; i++ )
+		{
+			pPixels[i] = rhs.pPixels[i];
+		}
 	}
 	return *this;
 }

@@ -37,6 +37,8 @@
 #include "LifeLine.h"
 #include <random>
 #include "SpriteDump.h"
+#include "Explosion.h"
+
 
 
 class Game
@@ -60,6 +62,8 @@ private:
 	FrameTimer ft;
     Background bg = { "Images\\SpaceBGmirror.bmp", gameField };
 	Sound hit = L"Sounds\\hit.wav";
+
+
     Ship ship; 
     Vec2 shipVel = { 0,0 };
     std::vector<Enemy> enemies;

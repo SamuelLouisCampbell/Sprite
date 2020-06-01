@@ -21,11 +21,11 @@
 #include "MainWindow.h"
 #include "Game.h"
 
-Game::Game( MainWindow& wnd )
+Game::Game(MainWindow& wnd)
 	:
-	wnd( wnd ),
-	gfx( wnd ), 
-	ship({400,300}, sprites.ship0Tile , sprites.shipSurface0, gameField)
+	wnd(wnd),
+	gfx(wnd),
+	ship({ 400,300 }, sprites.ship0Tile, sprites.shipSurface0, gameField)
 
 {
 	bgSound.Play(1.0f, 0.5f);
@@ -52,15 +52,13 @@ void Game::UpdateModel()
 	{
 		std::random_device rd;
 		std::mt19937 rng(rd());
-		std::uniform_real_distribution<float> xDist(gfx.GetScreenRect().left, gfx.GetScreenRect().right);
-		std::uniform_real_distribution<float> yDist(gfx.GetScreenRect().top, gfx.GetScreenRect().bottom);
+		std::uniform_real_distribution<float> xDist(gameField.left, gameField.right);
+		std::uniform_real_distribution<float> yDist(gameField.top, gameField.bottom);
 		
 		for (int i = 0; i < 10; i++)
 		{
-			int a = 32; 
-			Vec2 pos = {float(200 + a), float(200)};
-			enemies.emplace_back(pos , gameField, sprites.enemySurface0);
-			a += 32;
+			Vec2 pos = {xDist(rng),yDist(rng)};
+			enemies.emplace_back(pos , gameField, sprites.enemySurface0, sprites.explosionSurface0);
 		}
 		launchEnemyWave = false; 
 	}
@@ -78,6 +76,8 @@ void Game::UpdateModel()
 
 	ship.SetPos(wnd.mouse.GetPosF());
 	ship.Update({ 0,0 }, dt);
+
+	//laser hit stuff...
 	for (auto& e : enemies)
 	{
 		e.Update(dt);
@@ -99,6 +99,16 @@ void Game::UpdateModel()
 			i++;
 		}
 	}
+	//cleanup dead enemies and do explode effect..
+	for (int i = 0; i < enemies.size(); i++)
+	{
+		if (!enemies[i].IsAlive())
+		{
+			
+
+		}
+	}
+
 
 }
 
@@ -118,7 +128,7 @@ void Game::ComposeFrame()
 		l.Draw(gfx);
 		//gfx.DrawBorder(l.GetHitbox(), 1, Colors::Green);
 	}
-	
+
 	//gfx.DrawBorder(ship.GetCollisionRect(), 1, Colors::Cyan);
 	
 }
