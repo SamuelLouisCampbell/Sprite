@@ -25,7 +25,8 @@ Game::Game(MainWindow& wnd)
 	:
 	wnd(wnd),
 	gfx(wnd),
-	ship({ 400,300 }, sprites.ship0Tile, sprites.shipSurface0, gameField)
+	ship({ 400,300 }, sprites.ship0Tile, sprites.shipSurface0, gameField),
+	scoreBoard(ship.GetHp())
 
 {
 	bgSound.Play(1.0f, 0.5f);
@@ -52,10 +53,10 @@ void Game::UpdateModel()
 	{
 		std::random_device rd;
 		std::mt19937 rng(rd());
-		std::uniform_real_distribution<float> xDist(gameField.left, gameField.right);
-		std::uniform_real_distribution<float> yDist(gameField.top, gameField.bottom);
+		std::uniform_real_distribution<float> xDist(gameField.left + 100, gameField.right - 100);
+		std::uniform_real_distribution<float> yDist(gameField.top + 100, gameField.bottom - 100);
 		
-		for (int i = 0; i < 10; i++)
+		for (int i = 0; i < 50 ; i++)
 		{
 			Vec2 pos = {xDist(rng),yDist(rng)};
 			enemies.emplace_back(pos , gameField, sprites.enemySurface0, sprites.explosionSurface0);
@@ -88,6 +89,7 @@ void Game::UpdateModel()
 			if (lasers[i].GetHitbox().IsOverlappingWith(enemy_hitbox) && e.IsAlive())
 			{
 				e.TakeDamageOnHit(25);
+				gameScore += 25;
 				remove_element(lasers, i);
 				continue;
 			}
@@ -99,16 +101,8 @@ void Game::UpdateModel()
 			i++;
 		}
 	}
-	//cleanup dead enemies and do explode effect..
-	for (int i = 0; i < enemies.size(); i++)
-	{
-		if (!enemies[i].IsAlive())
-		{
-			
 
-		}
-	}
-
+	scoreBoard.UpdateScore(gameScore);
 
 }
 
@@ -117,6 +111,9 @@ void Game::ComposeFrame()
 	bg.Draw(gfx); //draw bg first...
 	gfx.DrawBorder(gameField, 2, Colors::Cyan);
 	ship.Draw(gfx);
+
+	scoreBoard.DrawScore(gfx, ScorePos);
+
 	for (auto& e : enemies)
 	{
 		e.Draw(gfx);

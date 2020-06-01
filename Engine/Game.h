@@ -38,6 +38,7 @@
 #include <random>
 #include "SpriteDump.h"
 #include "Explosion.h"
+#include "Scoreboard.h"
 
 
 
@@ -57,17 +58,26 @@ private:
 	MainWindow& wnd;
 	Graphics gfx;
     SpriteDump sprites;
+	FrameTimer ft;
+
+    //background game stuff:
     RectI gameField = { 50,750,50,550 };
     Sound bgSound = { L"Sounds\\BgMusic.wav", 0.0f, 14.0f };
-	FrameTimer ft;
     Background bg = { "Images\\SpaceBGmirror.bmp", gameField };
 	Sound hit = L"Sounds\\hit.wav";
 
+    //scoreboard things:
+    Scoreboard scoreBoard; 
+    int gameScore = 0;
+    Vec2 ScorePos = { 10.0f, 10.0f };
 
+    //Ships
     Ship ship; 
     Vec2 shipVel = { 0,0 };
-    std::vector<Enemy> enemies;
     std::vector<Lasers> lasers;
+
+    //Enemies
+    std::vector<Enemy> enemies;
     bool launchEnemyWave = true;
 
 

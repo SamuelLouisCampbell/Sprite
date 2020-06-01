@@ -26,6 +26,7 @@ public:
 	bool isAlive() const;
 	void SetPos(const Vec2& pos_in);
 	Vec2 GetPos() const; 
+	int GetHp() const; 
 
 	RectF GetCollisionRect() const; 
 private:

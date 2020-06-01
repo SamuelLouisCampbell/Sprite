@@ -64,6 +64,11 @@ Vec2 Ship::GetPos() const
 	return pos;
 }
 
+int Ship::GetHp() const
+{
+	return healthPoints;
+}
+
 RectF Ship::GetCollisionRect() const
 {
 	return collisionRect;
